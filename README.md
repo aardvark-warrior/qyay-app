@@ -3,9 +3,11 @@
 This is a monorepo that contains the client and server applications for the QYay application.
 
 - The client is a React app bootstrapped with Vite.
-- The server is a Nest.js application.
+- The server is a Nest.js application with PostgreSQL DB.
 
 This application is build with PERN stack.
+
+https://github.com/cs421sp24-homework/homework-aardvark-warrior
 
 ## Getting Started
 
