@@ -15,7 +15,7 @@ export class UserController {
   async login(
     @Body()
     userDto: CreateUserDTO,
-  ): Promise<UserResponseDTO> {
+  ): Promise<{access_token: string}> {
     const user = await this.authService.validateUser(
       userDto.username,
       userDto.password
@@ -23,8 +23,7 @@ export class UserController {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    delete user.password;
-    return user;
+    return this.authService.login(user);
   }
 
   @Post('register')
