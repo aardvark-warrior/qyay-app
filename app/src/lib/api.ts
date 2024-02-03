@@ -1,13 +1,12 @@
+import { nanoid } from "nanoid";
 import { users, events } from "@/lib/data";
-import type { User, Event } from "@/lib/data";
+import type { User, Event, EventWithUserData } from "@/lib/types";
 
 // Mock database
 const db = {
   users: [...users],
   events: [...events]
 };
-
-export type EventWithUserData = Event & { user?: User };
 
 // Helper function to find a user by ID
 export const findUser = async (id: number): Promise<User | undefined> => {
@@ -32,3 +31,31 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
     }, 200); // Simulate an API delay
   });
 };
+
+// Create a post
+export const createEvent = async (name: string, description: string, startTime?:any): Promise<Event> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const newEvent: Event = { 
+        id: nanoid(), 
+        userId: 1,
+        name, 
+        description
+      };
+      db.events.push(newEvent);
+      resolve(newEvent);
+    }, 200); // Simulate an API delay
+  });
+};
+
+
+// // Delete event by id
+// export const deleteEvent = async (id: string): Promise<void> => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       db.events = db.events.filter((event) => event.id !== id);
+//       resolve();
+//     }, 200); // Simulate an API delay
+//   });
+// };
+

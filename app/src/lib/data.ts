@@ -1,14 +1,4 @@
-export type User = {
-  id: number;
-  username: string;
-};
-
-export type Event = {
-  id: string;
-  userId: number;
-  name: string;
-  description?: string;
-};
+import { User, Event } from "./types";
 
 export const users: User[] = [
   {

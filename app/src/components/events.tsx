@@ -1,9 +1,10 @@
-import { EventWithUserData, fetchEvents } from "@/lib/api";
+import { fetchEvents } from "@/lib/api";
 import Event from "./event";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useStore } from "@/lib/store";
 
 const Events = () => {
-  const [events, setEvents] = useState<EventWithUserData[]>([]);
+  const [events, setEvents] = useStore((state) => [state.events, state.setEvents]);
 
   useEffect(() => {
     const loadEvents = async () => {
