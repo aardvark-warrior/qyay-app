@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDTO } from './create-event.dto';
 import { EventResponseDTO } from './event-response.dto';
 import { UpdateEventDTO } from './update-event.dto';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 @Controller('events')
 export class EventController {
@@ -29,14 +30,16 @@ export class EventController {
     return event;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  async createEvent(@Body() eventDto: CreateEventDTO): Promise<EventResponseDTO> {
+  async create(@Body() eventDto: CreateEventDTO): Promise<EventResponseDTO> {
     const userId = 1; // TODO: get userId from JWT Token
     const event = await this.eventService.createEvent(eventDto, userId);
     delete event.userId;
     return event;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -50,6 +53,7 @@ export class EventController {
     return event;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(
     @Param('id') id: string,
