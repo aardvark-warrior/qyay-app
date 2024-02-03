@@ -9,6 +9,7 @@ import { AuthService } from './auth/auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from './user/user.service';
 import { User } from './user/user.entity';
+import { UserController } from './user/user.controller';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { User } from './user/user.entity';
     }),
     TypeOrmModule.forFeature([User]),
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserController],
   providers: [AppService, AuthService, LocalStrategy, UserService],
 })
 export class AppModule {}
