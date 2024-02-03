@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDTO } from './create-event.dto';
 import { EventResponseDTO } from './event-response.dto';
 import { UpdateEventDTO } from './update-event.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 @Controller('events')
 export class EventController {
@@ -32,9 +33,11 @@ export class EventController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() eventDto: CreateEventDTO): Promise<EventResponseDTO> {
-    const userId = 1; // TODO: get userId from JWT Token
-    const event = await this.eventService.createEvent(eventDto, userId);
+  async create(
+    @Body() createEventDto: CreateEventDTO,
+    @UserId() userId: number,
+  ): Promise<EventResponseDTO> {
+    const event = await this.eventService.createEvent(createEventDto, userId);
     delete event.userId;
     return event;
   }
@@ -57,11 +60,18 @@ export class EventController {
   @Delete(':id')
   async remove(
     @Param('id') id: string,
+    @UserId() userId: number,
   ): Promise<{ statusCode: number; message: string }> {
-    const event = await this.eventService.remove(id);
+    let event = await this.eventService.findOne(id);
+
     if (!event) {
       throw new NotFoundException(`Event with ID ${id} not found`);
+    } else if (event.userId !== userId) {
+      throw new ForbiddenException();
     }
+
+    event = await this.eventService.remove(id);
+
     return {
       statusCode: 200,
       message: 'Event deleted successfully',

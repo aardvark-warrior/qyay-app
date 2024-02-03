@@ -4,13 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { validate } from './env.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './auth/jwt.strategy';
 import { LocalStrategy } from './auth/local.strategy';
 import { AuthService } from './auth/auth.service';
-import { PassportModule } from '@nestjs/passport';
-import { UserService } from './user/user.service';
 import { User } from './user/user.entity';
 import { UserController } from './user/user.controller';
-import { JwtModule } from '@nestjs/jwt';
+import { UserService } from './user/user.service';
+import { PassportModule } from '@nestjs/passport';
 import { EventModule } from './event/event.module';
 
 @Module({
@@ -47,6 +48,6 @@ import { EventModule } from './event/event.module';
     EventModule,
   ],
   controllers: [AppController, UserController],
-  providers: [AppService, AuthService, LocalStrategy, UserService],
+  providers: [AppService, AuthService, LocalStrategy, UserService, JwtStrategy],
 })
 export class AppModule {}
