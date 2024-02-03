@@ -11,6 +11,7 @@ import { UserService } from './user/user.service';
 import { User } from './user/user.entity';
 import { UserController } from './user/user.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { JwtModule } from '@nestjs/jwt';
       }),
       inject: [ConfigService],
     }),
+    EventModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, LocalStrategy, UserService],
