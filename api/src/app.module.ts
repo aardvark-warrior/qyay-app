@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LocalStrategy } from './auth/local.strategy';
 import { AuthService } from './auth/auth.service';
 import { PassportModule } from '@nestjs/passport';
+import { UserService } from './user/user.service';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
@@ -28,8 +30,9 @@ import { PassportModule } from '@nestjs/passport';
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService, LocalStrategy],
+  providers: [AppService, AuthService, LocalStrategy, UserService],
 })
 export class AppModule {}
