@@ -1,7 +1,9 @@
-export const LogoutDialog = () => {
+const LogoutDialog = () => {
   return (
     <div>
       Logout
     </div>
   );
 }
+
+export default LogoutDialog;

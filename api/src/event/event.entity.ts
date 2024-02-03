@@ -12,11 +12,11 @@ export class Event {
   @Column()
   description: string;
   
-  @CreateDateColumn({
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP',
-  })
-  startTime: Date;
+  // @CreateDateColumn({
+  //   type: 'timestamptz',
+  //   default: () => 'CURRENT_TIMESTAMP',
+  // })
+  // startTime: Date;
 
   @ManyToOne(() => User, (user) => {user.events})
   @JoinColumn({ name: 'userId' })
