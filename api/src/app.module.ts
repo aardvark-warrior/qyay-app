@@ -1,13 +1,19 @@
-import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { validate } from "./env.validation";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { validate } from './env.validation';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { LocalStrategy } from './auth/local.strategy';
+import { AuthService } from './auth/auth.service';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // Loads the .env file
+    PassportModule,
+    ConfigModule.forRoot({
+      // validate,    // env.validation DB_PORT isNumber failing after adding TypeOrmModule 
+    }), // Loads the .env file
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -24,6 +30,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthService, LocalStrategy],
 })
 export class AppModule {}
