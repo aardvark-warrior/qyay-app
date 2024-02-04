@@ -35,3 +35,9 @@ export const isTokenExpired = (token: string): boolean => {
   }
 };
 
+// Store the token in local storage
+export const storeAuthenticatedUserToken = (token: string): void => {
+  localStorage.setItem("token", token);
+};
+
+
