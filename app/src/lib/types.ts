@@ -3,7 +3,6 @@ export type Event = {
   userId: number;
   name: string;
   description?: string;
-  startTime?: string;
 }
 
 export type User = {

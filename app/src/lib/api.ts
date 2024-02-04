@@ -32,8 +32,8 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   });
 };
 
-// Create a post
-export const createEvent = async (name: string, description: string, startTime?:any): Promise<Event> => {
+// Create an event
+export const createEvent = async (name: string, description?: string): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const newEvent: Event = { 

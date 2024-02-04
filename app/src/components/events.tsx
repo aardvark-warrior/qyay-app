@@ -2,18 +2,10 @@ import { fetchEvents } from "@/lib/api";
 import Event from "./event";
 import { useEffect } from "react";
 import { useStore } from "@/lib/store";
+import useQueryEvents from "@/hooks/use-query-events";
 
 const Events = () => {
-  const [events, setEvents] = useStore((state) => [state.events, state.setEvents]);
-
-  useEffect(() => {
-    const loadEvents = async () => {
-      const fetchedEvents = await fetchEvents();
-      setEvents(fetchedEvents);
-    };
-
-    loadEvents();
-  }, []);
+  const { events } = useQueryEvents;
 
   return (
     <div className="">
