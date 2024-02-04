@@ -9,7 +9,7 @@ type State = {
 
 type Action = {
   setEvents: (events: EventWithUserData[]) => void;
-  removeEvent: (id: string) => void;
+  addEvent: (event: Event) => void;
   // Add more actions
 };
 
@@ -24,8 +24,15 @@ export const useStore = create<State & Action>()(
 
     setEvents: (events) => set({ events }),
 
-    removeEvent: (id) => {
-      const newEvents = get().events.filter((event) => event.id !== id);
+    addEvent: (event) => {
+      const newEvent: EventWithUserData = {
+        ...event,
+        user: {
+          id: 1, 
+          username:"edsger"
+        },
+      };
+      const newEvents = [...get().events, newEvent];
       set({ events: newEvents });
     },
   }))
