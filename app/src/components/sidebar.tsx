@@ -1,5 +1,6 @@
 import { HomeIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
+import { AddEventDialog } from "./add-event-dialog";
 
 const Sidebar = () => {
   return (
@@ -8,7 +9,8 @@ const Sidebar = () => {
           <HomeIcon className="w-5 h-5" />
       </Button>
       <Button aria-label={"Make a Post"} variant="default" size="sm">
-        <PlusCircledIcon className="w-5 h-5" />
+        {/* <PlusCircledIcon className="w-5 h-5" /> */}
+        <AddEventDialog />
       </Button>
     </div>
   );

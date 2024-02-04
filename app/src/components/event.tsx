@@ -1,10 +1,10 @@
-import { Event as EventType } from "@/lib/types";
+import { EventWithUserData } from "@/lib/types";
 import EventActions from "./event-actions";
 
 const Event = ({ 
-  event 
+  event
 }: { 
-  event: EventType 
+  event: EventWithUserData
 }) => {
   return (
     <div className="p-4 border-b-2 border-slate-400">

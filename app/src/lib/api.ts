@@ -33,7 +33,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 };
 
 // Create an event
-export const createEvent = async (name: string, description?: string): Promise<Event> => {
+export const createEvent = async (name: string, description?: string): Promise<EventWithUserData> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const newEvent: Event = { 

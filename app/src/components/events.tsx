@@ -1,11 +1,13 @@
-import { fetchEvents } from "@/lib/api";
-import Event from "./event";
-import { useEffect } from "react";
 import { useStore } from "@/lib/store";
+import Event from "./event";
 import useQueryEvents from "@/hooks/use-query-events";
 
+// import { useEffect } from "react";
+// import { fetchEvents } from "@/lib/api";
+
+
 const Events = () => {
-  const { events } = useQueryEvents;
+  const { events } = useQueryEvents();
 
   return (
     <div className="">
