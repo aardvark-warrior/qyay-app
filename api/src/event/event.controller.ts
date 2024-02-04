@@ -5,6 +5,7 @@ import { EventResponseDTO } from './event-response.dto';
 import { UpdateEventDTO } from './update-event.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/user-id.decorator';
+import { EventOwnershipGuard } from 'src/guards/event-owner.guard';
 
 @Controller('events')
 export class EventController {
@@ -31,7 +32,7 @@ export class EventController {
     return event;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EventOwnershipGuard)
   @Post()
   async create(
     @Body() createEventDto: CreateEventDTO,
@@ -42,7 +43,7 @@ export class EventController {
     return event;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EventOwnershipGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -56,7 +57,7 @@ export class EventController {
     return event;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EventOwnershipGuard)
   @Delete(':id')
   async remove(
     @Param('id') id: string,
