@@ -1,4 +1,3 @@
-import { useStore } from "@/lib/store";
 import Event from "./event";
 import useQueryEvents from "@/hooks/use-query-events";
 

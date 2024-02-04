@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,12 +14,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import useMutationEvents from "@/hooks/use-mutation-events";
+import { useToast } from "@/components/ui/use-toast";
+
 
 export const AddEventDialog = () => {
   const [name, setName] = useState("");
+  const { toast } = useToast();
   const { addNewEvent } = useMutationEvents();
 
   const handleSave = async () => {
+    if (!name) {
+      toast({
+        variant: "destructive",
+        title: "Sorry! Event name cannot be empty! 🙁",
+        description: `Please enter the name for your event.`,
+      });
+      return;
+    }
     await addNewEvent(name);
     setName("");
   };
