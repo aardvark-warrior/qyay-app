@@ -1,6 +1,7 @@
 import { EventWithUserData, User } from "./types";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { getAuthenticatedUser } from "./auth";
 
 type State = {
   events: EventWithUserData[];
@@ -29,12 +30,10 @@ export const useStore = create<State & Action>()(
     setEvents: (events) => set({ events }),
 
     addEvent: (event) => {
+      const user = getAuthenticatedUser();
       const newEvent: EventWithUserData = {
         ...event,
-        user: {
-          id: 1,
-          username: "edsger",
-        },
+        user,
       };
       const newEvents = [...get().events, newEvent];
       set({ events: newEvents });

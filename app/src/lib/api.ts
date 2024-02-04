@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { users, events } from "@/lib/data";
 import type { User, Event, EventWithUserData } from "@/lib/types";
+import { getAuthenticatedUser } from "./auth";
 
 // Mock database
 const db = {
@@ -33,12 +34,13 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 };
 
 // Create an event
-export const createEvent = async (name: string, description?: string): Promise<EventWithUserData> => {
+export const createEvent = async (name: string, description?: string): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
+      const user = getAuthenticatedUser();
       const newEvent: Event = { 
         id: nanoid(), 
-        userId: 1,
+        userId: user.id,
         name, 
         description
       };
