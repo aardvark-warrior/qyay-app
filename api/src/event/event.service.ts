@@ -22,12 +22,12 @@ export class EventService {
   }
 
   // Read
-  async findAll(): Promise<Event[]> {
-    return this.eventRepository.find();
-  }
-
   async findOne(id: string): Promise<Event | null> {
     return this.eventRepository.findOneBy({ id });
+  }
+
+  async findAll(): Promise<Event[]> {
+    return this.eventRepository.find();
   }
 
   // Update

@@ -8,4 +8,8 @@ export class UpdateEventDTO {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsString()
+  startTime?: string;
 }
