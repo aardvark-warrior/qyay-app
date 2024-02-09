@@ -6,7 +6,7 @@ function useMutationsEvents() {
   const addEvent = useStore((state) => state.addEvent);
   const removeEvent = useStore((state) => state.removeEvent);
 
-  const addNewEvent = async (name: string, description: string, startTime?: string) => {
+  const addNewEvent = async (name: string, description?: string, startTime?: string) => {
     const newEvent = await createEvent(name, description, startTime); // API call to add event to Backend
     addEvent(newEvent);                                               // Zustand Action call to update Global states
   }

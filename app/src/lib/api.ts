@@ -34,7 +34,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 };
 
 // Create a post
-export const createEvent = async (name: string, description: string, startTime?:string): Promise<Event> => {
+export const createEvent = async (name: string, description?: string, startTime?:string): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // TODO: replace Mock userId
@@ -43,7 +43,7 @@ export const createEvent = async (name: string, description: string, startTime?:
         userId: 1,
         name, 
         description,
-        // startTime: new Date().toISOString();
+        startTime: startTime || new Date().toISOString(),
       };
       db.events.push(newEvent);
       resolve(newEvent);
