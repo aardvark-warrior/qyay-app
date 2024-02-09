@@ -6,16 +6,13 @@ import { UserResponseDTO } from "src/user/user-reponse.dto";
 
 @Injectable()
 export class AuthService {
-
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService,
     ) {}
     
-    async validateUser(
-        username: string, 
-        password: string
-    ): Promise<UserResponseDTO | null> {
+    // prev: Promise<any>
+    async validateUser(username: string, password: string): Promise<UserResponseDTO | null> {
         const user = await this.userService.findOne(username);
         if (user) {
             const isMatch = await bcrypt.compare(password, user.password);
@@ -29,7 +26,10 @@ export class AuthService {
     }
 
     async login(user: UserResponseDTO) {
-        const payload = { username: user.username, sub: user.id };
+        const payload = { 
+            username: user.username, 
+            sub: user.id 
+        };
         return {
             access_token: this.jwtService.sign(payload),
         };

@@ -11,18 +11,18 @@ export class UserService {
         @InjectRepository(User)
         private userRepository: Repository<User>
     ) {}
-    
+
+    // Read
+    async findOne(username: string): Promise<User | undefined> {
+        return this.userRepository.findOneBy({ username });
+    }
+
     // Create
     async createUser(userDto: CreateUserDTO): Promise<User> {
         const user = new User();
         user.username = userDto.username;
         user.password = await bcrypt.hash(userDto.password, 10);
         return this.userRepository.save(user);
-    }
-
-    // Read
-    async findOne(username: string): Promise<User | undefined> {
-        return this.userRepository.findOneBy({ username });
     }
 
     // Update

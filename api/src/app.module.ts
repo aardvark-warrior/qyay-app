@@ -6,13 +6,13 @@ import { validate } from './env.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './auth/jwt.strategy';
-import { LocalStrategy } from './auth/local.strategy';
-import { AuthService } from './auth/auth.service';
 import { User } from './user/user.entity';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
-import { PassportModule } from '@nestjs/passport';
 import { EventModule } from './event/event.module';
+import { AuthService } from './auth/auth.service';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './auth/local.strategy';
 
 @Module({
   imports: [

@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post, UnauthorizedException } from "@nestjs/common";
-import { CreateUserDTO } from "./create-user.dto";
-import { UserResponseDTO } from "./user-reponse.dto";
+import { Body, Controller, Post, UnauthorizedException } from "@nestjs/common";
 import { UserService } from "./user.service";
+import { CreateUserDTO } from "./create-user.dto";
 import { AuthService } from "src/auth/auth.service";
+import { UserResponseDTO } from "./user-reponse.dto";
 
 @Controller('users')    // endpoint name
 export class UserController {
@@ -11,11 +11,19 @@ export class UserController {
     private readonly authService: AuthService,
   ) {}
 
+  @Post('register')
+  async createUser(@Body() userDto: CreateUserDTO): Promise<UserResponseDTO> {
+    const user = await this.userService.createUser(userDto);
+    delete user.password;
+    return user;
+    // Alternatively
+    // const { password, ...userOutput } = user;
+    // return userOutput;
+  }
+
   @Post('login')
-  async login(
-    @Body()
-    userDto: CreateUserDTO,
-  ): Promise<{access_token: string}> {
+  // prev: Promise<UserResponseDTO>
+  async login(@Body() userDto: CreateUserDTO): Promise<{access_token: string}> {
     const user = await this.authService.validateUser(
       userDto.username,
       userDto.password
@@ -23,20 +31,10 @@ export class UserController {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
+    // TODO prev: return user;
     return this.authService.login(user);
+    
   }
 
-  @Post('register')
-  async createUser(
-    @Body()
-    userDto: CreateUserDTO,
-  ): Promise<UserResponseDTO> {
-    const user = await this.userService.createUser(userDto);
-    
-    delete user.password;
-    return user;
-    // Alternatively
-    // const { password, ...userOutput } = user;
-    // return userOutput;
-  }
+  
 }
