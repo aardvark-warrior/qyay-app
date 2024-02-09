@@ -1,18 +1,12 @@
 import { Button } from "./ui/button";
-import { useStore } from "@/lib/store";
-import { deleteEvent } from "@/lib/api";
+import useMutationsEvents from "@/hooks/use-mutations-events";
 
 const EventActions = ({ 
   eventId,
 }: { 
   eventId: string,
 }) => {
-  const removeEvent = useStore((state) => state.removeEvent);
-  
-  const handleDelete = async (eventId: string) => {
-    await deleteEvent(eventId); // API backend side
-    removeEvent(eventId);       // Zustand (store) frontend side
-  }
+  const { deleteEventById } = useMutationsEvents();
 
   return (
     <div className="">
@@ -22,7 +16,7 @@ const EventActions = ({
       </Button>
       </div>
       <div>
-      <Button className="text-rose-700" variant="ghost" size="sm" onClick={() => handleDelete(eventId)} >
+      <Button className="text-rose-700" variant="ghost" size="sm" onClick={() => deleteEventById(eventId)} >
         Delete Event
       </Button>
       </div>
