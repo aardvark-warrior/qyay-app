@@ -1,4 +1,5 @@
 import { EventWithUserData } from "./types";
+// import { log } from "./logger";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -25,7 +26,10 @@ export const useStore = create<State & Action>()(
     setEvents: (events) => set({ events }),
 
     removeEvent: (id) => {
+      // log.debug("Store's delete event is called with id =", id);
+      // log.debug("# events before delete", get().events.length);
       const newEvents = get().events.filter((event) => event.id !== id);
+      // log.debug("# events after delete", newEvents.length);
       set({ events: newEvents });
     },
   }))

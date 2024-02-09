@@ -1,12 +1,19 @@
 import { Button } from "./ui/button";
+import { useStore } from "@/lib/store";
+import { deleteEvent } from "@/lib/api";
 
 const EventActions = ({ 
   eventId,
-  handleDelete,
 }: { 
   eventId: string,
-  handleDelete: (eventId: string) => void,
 }) => {
+  const removeEvent = useStore((state) => state.removeEvent);
+  
+  const handleDelete = async (eventId: string) => {
+    await deleteEvent(eventId); // API backend side
+    removeEvent(eventId);       // Zustand (store) frontend side
+  }
+
   return (
     <div className="">
       <div>

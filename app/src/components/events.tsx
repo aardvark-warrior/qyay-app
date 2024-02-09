@@ -1,4 +1,4 @@
-import { deleteEvent, fetchEvents } from "@/lib/api";
+import { fetchEvents } from "@/lib/api";
 import { EventWithUserData } from "@/lib/types";
 import Event from "./event";
 import { useEffect } from "react";
@@ -13,12 +13,6 @@ const Events = () => {
     setEvents(fetchedEventsWithUserData);
   };
 
-  const handleDelete = async(eventId: string) => {
-    // log.debug("Delete event", eventId);
-    await deleteEvent(eventId);
-    setEvents(events.filter((event) => event.id !== eventId));
-  }
-
   useEffect(() => {
     loadEvents();
   }, []);
@@ -26,7 +20,7 @@ const Events = () => {
   return (
     <div className="">
       {events.map((event) =>
-        <Event event={event} key={event.id} handleDelete={handleDelete}/>
+        <Event event={event} key={event.id} />
       )}
     </div>
   );

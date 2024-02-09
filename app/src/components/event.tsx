@@ -1,12 +1,10 @@
-import { Event as EventType } from "@/lib/types";
+import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
 
 const Event = ({ 
   event,
-  handleDelete,
 }: { 
-  event: EventType ,
-  handleDelete: (eventId: string) => void,
+  event: EventWithUserData ,
 }) => {
   const {id, name, userId, description, startTime} = event;
   return (
@@ -16,7 +14,6 @@ const Event = ({
         eventName={name}
         creator={userId}
         startTime={startTime}
-        handleDelete={handleDelete}
       />
       <div className="font-thin">{description}</div>
     </div>
