@@ -2,6 +2,7 @@ import { Event, EventWithUserData } from "./types";
 // import { log } from "./logger";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { getAuthenticatedUser } from "./auth";
 
 type State = {
   events: EventWithUserData[];
@@ -35,13 +36,10 @@ export const useStore = create<State & Action>()(
     },
 
     addEvent: (event) => {
+      const user = getAuthenticatedUser();
       const newEventWithUserData: EventWithUserData = {
         ...event,
-        // TODO: replace Mock user
-        user: {
-          id: 1,
-          username: "user-1",
-        }
+        user,
       };
       const newEvents = {...get().events, newEventWithUserData};
       set({ events: newEvents });
