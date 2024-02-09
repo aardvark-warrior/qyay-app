@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Event } from './event.entity';
 import { Repository } from 'typeorm';
+import { Event } from './event.entity';
 import { CreateEventDTO } from './create-event.dto';
 import { UpdateEventDTO } from './update-event.dto';
 
@@ -13,9 +13,9 @@ export class EventService {
   ) {}
 
   // Create
-  async createEvent(eventDto: CreateEventDTO, userId: number): Promise<Event> {
+  async create(createEventDto: CreateEventDTO, userId: number): Promise<Event> {
     const event = await this.eventRepository.create({
-      ...eventDto,
+      ...createEventDto,
       userId
     });
     return this.eventRepository.save(event);

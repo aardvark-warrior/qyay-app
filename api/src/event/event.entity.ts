@@ -9,14 +9,15 @@ export class Event {
   @Column()
   name: string;
   
-  @Column()
+  @Column({ nullable: true })
   description: string;
   
-  // @CreateDateColumn({
-  //   type: 'timestamptz',
-  //   default: () => 'CURRENT_TIMESTAMP',
-  // })
-  // startTime: Date;
+  @CreateDateColumn({
+    nullable: true,
+    type: 'timestamptz',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  startTime: Date;
 
   @ManyToOne(() => User, (user) => {user.events})
   @JoinColumn({ name: 'userId' })

@@ -37,7 +37,7 @@ export class EventController {
     @Body() createEventDto: CreateEventDTO,
     @UserId() userId: number,
   ): Promise<EventResponseDTO> {
-    const event = await this.eventService.createEvent(createEventDto, userId);
+    const event = await this.eventService.create(createEventDto, userId);
     delete event.userId;
     return event;
   }
