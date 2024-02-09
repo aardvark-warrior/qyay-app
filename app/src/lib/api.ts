@@ -22,12 +22,13 @@ export const findUser = async (id: number): Promise<User | undefined> => {
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   return new Promise((resolve) => {
     setTimeout(async () => {
-      const data: EventWithUserData[] = [];
-      for (const event of db.events) {
-        const user = await findUser(event.userId);
-        data.push({ ...event, user });
-      }
-      resolve(data);
+      const eventsWithUserData = await Promise.all(
+        db.events.map(async (event) => {
+          const user = await findUser(event.userId);
+          return {...event, user};
+        }),
+      );
+      resolve(eventsWithUserData);
     }, 200); // Simulate an API delay
   });
 };

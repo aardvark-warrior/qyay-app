@@ -1,5 +1,6 @@
 import { Event as EventType } from "@/lib/types";
 import EventActions from "./event-actions";
+import EventHeader from "./event-header";
 
 const Event = ({ 
   event 
@@ -8,9 +9,11 @@ const Event = ({
 }) => {
   return (
     <div className="p-4 border-b-2 border-slate-400">
-      <div>
-        {event.name}
-      </div>
+      <EventHeader 
+        eventName={event.name}
+        creator={event.userId}
+        startTime={event.startTime}
+      />
       <EventActions />
     </div>
   );
