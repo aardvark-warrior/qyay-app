@@ -8,9 +8,7 @@ const Sidebar = () => {
       <Button aria-label={"Home"} variant="ghost" size="sm">
           <HomeIcon className="w-5 h-5" />
       </Button>
-      <Button aria-label={"Make a Post"} variant="default" size="sm">
-        <AddEventDialog />
-      </Button>
+      <AddEventDialog />
     </div>
   );
 }
