@@ -1,26 +1,21 @@
 import { Button } from "./ui/button";
-import { deleteEvent } from "@/lib/api";
 
 const EventActions = ({ 
-  eventId 
+  eventId,
+  handleDelete,
 }: { 
-  eventId: string 
+  eventId: string,
+  handleDelete: (eventId: string) => void,
 }) => {
-  const handleDelete = async() => {
-    await deleteEvent(eventId);
-  };
-
   return (
     <div className="">
       <div>
       <Button variant="ghost" size="sm">
-        {/* <Pencil1Icon className="w-5 h-5" /> */}
         Edit Event
       </Button>
       </div>
       <div>
-      <Button className="text-rose-700" variant="ghost" size="sm" onClick={handleDelete} >
-        {/* <TrashIcon className="w-5 h-5" /> */}
+      <Button className="text-rose-700" variant="ghost" size="sm" onClick={() => handleDelete(eventId)} >
         Delete Event
       </Button>
       </div>

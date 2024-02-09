@@ -5,12 +5,14 @@ const EventHeader = ({
   eventId, 
   eventName,
   creator,
-  startTime
+  startTime,
+  handleDelete,
 }: {
   eventId: string,
   eventName: string,
   creator: number,
   startTime?: string,
+  handleDelete: (eventId: string) => void,
 }) => {
   return (
     <div className="flex justify-between" >
@@ -25,7 +27,7 @@ const EventHeader = ({
           {startTime}
         </p>
       </div>
-      <EventActions eventId={eventId}/>
+      <EventActions eventId={eventId} handleDelete={handleDelete}/>
     </div>
   );
 }
