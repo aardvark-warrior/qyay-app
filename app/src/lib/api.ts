@@ -41,7 +41,8 @@ export const createEvent = async (name: string, description: string, startTime?:
         id: nanoid(), 
         userId: 1,
         name, 
-        description
+        description,
+        startTime
       };
       db.events.push(newEvent);
       resolve(newEvent);
@@ -50,13 +51,13 @@ export const createEvent = async (name: string, description: string, startTime?:
 };
 
 
-// // Delete event by id
-// export const deleteEvent = async (id: string): Promise<void> => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       db.events = db.events.filter((event) => event.id !== id);
-//       resolve();
-//     }, 200); // Simulate an API delay
-//   });
-// };
+// Delete event by id
+export const deleteEvent = async (id: string): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      db.events = db.events.filter((event) => event.id !== id);
+      resolve();
+    }, 200); // Simulate an API delay
+  });
+};
 

@@ -1,15 +1,29 @@
 import { Button } from "./ui/button";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
+import { deleteEvent } from "@/lib/api";
 
-const EventActions = () => {
+const EventActions = ({ 
+  eventId 
+}: { 
+  eventId: string 
+}) => {
+  const handleDelete = async() => {
+    await deleteEvent(eventId);
+  };
+
   return (
-    <div className="flex justify-around">
+    <div className="">
+      <div>
       <Button variant="ghost" size="sm">
-        <Pencil1Icon className="w-5 h-5" />
+        {/* <Pencil1Icon className="w-5 h-5" /> */}
+        Edit Event
       </Button>
-      <Button size="sm">
-        <TrashIcon className="w-5 h-5" />
+      </div>
+      <div>
+      <Button className="text-rose-700" variant="ghost" size="sm" onClick={handleDelete} >
+        {/* <TrashIcon className="w-5 h-5" /> */}
+        Delete Event
       </Button>
+      </div>
     </div>
   );
 };
