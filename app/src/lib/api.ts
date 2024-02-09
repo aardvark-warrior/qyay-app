@@ -34,7 +34,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 };
 
 // Create a post
-export const createEvent = async (name: string, description: string, startTime?:any): Promise<Event> => {
+export const createEvent = async (name: string, description: string, startTime?:string): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       // TODO: replace Mock userId
