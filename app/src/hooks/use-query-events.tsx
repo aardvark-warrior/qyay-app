@@ -8,7 +8,7 @@ function useQueryEvents() {
 
   const loadEvents = async () => {
     const fetchedEventsWithUserData = await fetchEvents();  // API call to query information from Backend
-    setEvents(fetchedEventsWithUserData);                   // Zustand Action call to update states for Frontend
+    setEvents(fetchedEventsWithUserData);                   // Zustand Action call to update Global states for Frontend
   };
 
   useEffect(() => {

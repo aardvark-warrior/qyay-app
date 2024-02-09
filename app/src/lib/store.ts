@@ -1,4 +1,4 @@
-import { EventWithUserData } from "./types";
+import { Event, EventWithUserData } from "./types";
 // import { log } from "./logger";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
@@ -11,6 +11,7 @@ type State = {
 type Action = {
   setEvents: (events: EventWithUserData[]) => void;
   removeEvent: (id: string) => void;
+  addEvent: (event: Event) => void;
   // Add more actions
 };
 
@@ -30,6 +31,19 @@ export const useStore = create<State & Action>()(
       // log.debug("# events before delete", get().events.length);
       const newEvents = get().events.filter((event) => event.id !== id);
       // log.debug("# events after delete", newEvents.length);
+      set({ events: newEvents });
+    },
+
+    addEvent: (event) => {
+      const newEventWithUserData: EventWithUserData = {
+        ...event,
+        // TODO: replace Mock user
+        user: {
+          id: 1,
+          username: "user-1",
+        }
+      };
+      const newEvents = {...get().events, newEventWithUserData};
       set({ events: newEvents });
     },
   }))

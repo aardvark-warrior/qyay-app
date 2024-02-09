@@ -37,6 +37,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 export const createEvent = async (name: string, description: string, startTime?:any): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
+      // TODO: replace Mock userId
       const newEvent: Event = { 
         id: nanoid(), 
         userId: 1,

@@ -7,7 +7,7 @@ function useMutationsEvents() {
 
   const deleteEventById = async (eventId: string) => {
     await deleteEvent(eventId); // API call to delete data from Backend
-    removeEvent(eventId);       // Zustand Action call to update states for Frontend
+    removeEvent(eventId);       // Zustand Action call to update Global states for Frontend
   };
 
   return { deleteEventById };
