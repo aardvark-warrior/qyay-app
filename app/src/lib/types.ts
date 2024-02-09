@@ -1,8 +1,9 @@
 export type Event = {
   id: string;
   userId: number;
+  // User-entered fields
   name: string;
-  description?: string;
+  description: string;
   startTime?: string;
 }
 
