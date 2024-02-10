@@ -21,20 +21,20 @@ export const findUser = async (id: number): Promise<User | undefined> => {
 
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      const sortedEvents = db.events.sort(
-        (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-      );
-      const eventsWithUserData = await Promise.all(
-        sortedEvents.map(async (event) => {
-          const user = await findUser(event.userId);
-          return { ...event, user };
-        }),
-      );
-      resolve(eventsWithUserData);
-    }, 200); // Simulate an API delay
-  });
+  const API_URL = import.meta.env.VITE_API_URL;
+  console.log(API_URL);
+  const response = await fetch(`${API_URL}/events?withUserData=true`);
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error: ${response.status} - ${
+        responseJson.message || response.statusText
+      }`,
+    );
+  }
+
+  return responseJson.data;
 };
 
 // Create a post

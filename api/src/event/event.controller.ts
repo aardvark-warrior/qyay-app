@@ -33,11 +33,6 @@ export class EventController {
   @Get()
   async findAll(
     @Query() query: FindEventsQueryDTO,
-    // @Query("limit") limit: number = 10,
-    // @Query("offset") offset: number = 0,
-    // @Query("search") search?: string,
-    // @Query("username") username?: string,
-    // @Query("withUserData") withUserData?: boolean,
   ): Promise<FindEventsResponseDTO> {
     const { limit, offset, search, username, withUserData } = query;
 
@@ -73,7 +68,7 @@ export class EventController {
           delete event.user.password;
         }
         return event as EventResponseDTO;
-      }),
+      })
     };
   }
 
