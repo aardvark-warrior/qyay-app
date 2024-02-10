@@ -1,5 +1,5 @@
-import { Catch, ArgumentsHost, HttpException } from '@nestjs/common';
-import { Response } from 'express';
+import { Catch, ArgumentsHost, HttpException } from "@nestjs/common";
+import { Response } from "express";
 
 @Catch()
 export class HttpResponseFilter {
@@ -20,17 +20,17 @@ export class HttpResponseFilter {
       const exceptionResponse = exception.getResponse();
 
       // prev: if (typeof response === "object" && "data" in response) {
-      if (typeof exceptionResponse === 'string') {
+      if (typeof exceptionResponse === "string") {
         // If the response is a string, set it as the message
-        errorResponse['message'] = exceptionResponse;
+        errorResponse["message"] = exceptionResponse;
       } else {
         // If the response is an object, spread it into errorResponse
         errorResponse = { ...errorResponse, ...exceptionResponse };
       }
     } else {
-      errorResponse['message'] = 'Internal Server Error';
-      if (process.env.NODE_ENV === 'development') {
-        errorResponse['error'] = exception.toString();
+      errorResponse["message"] = "Internal Server Error";
+      if (process.env.NODE_ENV === "development") {
+        errorResponse["error"] = exception.toString();
       }
     }
 

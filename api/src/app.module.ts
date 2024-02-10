@@ -1,24 +1,24 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { validate } from './env.validation';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './auth/jwt.strategy';
-import { User } from './user/user.entity';
-import { UserController } from './user/user.controller';
-import { UserService } from './user/user.service';
-import { EventModule } from './event/event.module';
-import { AuthService } from './auth/auth.service';
-import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './auth/local.strategy';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { validate } from "./env.validation";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { JwtModule } from "@nestjs/jwt";
+import { JwtStrategy } from "./auth/jwt.strategy";
+import { User } from "./user/user.entity";
+import { UserController } from "./user/user.controller";
+import { UserService } from "./user/user.service";
+import { EventModule } from "./event/event.module";
+import { AuthService } from "./auth/auth.service";
+import { PassportModule } from "@nestjs/passport";
+import { LocalStrategy } from "./auth/local.strategy";
 
 @Module({
   imports: [
     PassportModule,
     ConfigModule.forRoot({
-      // validate,    // env.validation DB_PORT isNumber failing after adding TypeOrmModule 
+      // validate,    // env.validation DB_PORT isNumber failing after adding TypeOrmModule
     }), // Loads the .env file
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -38,9 +38,9 @@ import { LocalStrategy } from './auth/local.strategy';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
+        secret: configService.get<string>("JWT_SECRET"),
         signOptions: {
-          expiresIn: configService.get<string>('JWT_EXPIRATION'),
+          expiresIn: configService.get<string>("JWT_EXPIRATION"),
         },
       }),
       inject: [ConfigService],

@@ -9,6 +9,6 @@ const Feed = () => {
       <Events />
     </div>
   );
-}
+};
 
 export default Feed;

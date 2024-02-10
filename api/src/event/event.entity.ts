@@ -1,26 +1,38 @@
 import { User } from "src/user/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Event {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
-  
+
   @Column({ nullable: true })
   description: string;
-  
+
   @CreateDateColumn({
     nullable: true,
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP',
+    type: "timestamptz",
+    default: () => "CURRENT_TIMESTAMP",
   })
   startTime: Date;
 
-  @ManyToOne(() => User, (user) => {user.events})
-  @JoinColumn({ name: 'userId' })
+  @ManyToOne(
+    () => User,
+    (user) => {
+      user.events;
+    },
+  )
+  @JoinColumn({ name: "userId" })
   user: User;
 
   @Column()

@@ -52,5 +52,5 @@ export const events: Event[] = [
     userId: 3,
     name: "Event 6",
     description: "Welcome to Event 6!",
-  }
+  },
 ];

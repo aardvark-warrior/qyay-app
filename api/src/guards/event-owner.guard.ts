@@ -4,11 +4,11 @@ import {
   ExecutionContext,
   BadRequestException,
   NotFoundException,
-} from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
+} from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
 
-import { RequestWithUser } from 'src/decorators/user-id.decorator';
-import { EventService } from 'src/event/event.service';
+import { RequestWithUser } from "src/decorators/user-id.decorator";
+import { EventService } from "src/event/event.service";
 
 @Injectable()
 export class EventOwnershipGuard implements CanActivate {
@@ -30,7 +30,7 @@ export class EventOwnershipGuard implements CanActivate {
 
     // If eventId is not provided
     if (!eventId) {
-      throw new BadRequestException('Invalid or missing event ID');
+      throw new BadRequestException("Invalid or missing event ID");
     }
 
     const event = await this.eventService.findOne(eventId);
@@ -44,4 +44,3 @@ export class EventOwnershipGuard implements CanActivate {
     return event.userId == userId;
   }
 }
-

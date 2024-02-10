@@ -6,7 +6,7 @@ import { getAuthenticatedUser } from "./auth";
 // Mock database
 const db = {
   users: [...users],
-  events: [...events]
+  events: [...events],
 };
 
 // Helper function to find a user by ID
@@ -26,7 +26,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
       const eventsWithUserData = await Promise.all(
         db.events.map(async (event) => {
           const user = await findUser(event.userId);
-          return {...event, user};
+          return { ...event, user };
         }),
       );
       resolve(eventsWithUserData);
@@ -35,14 +35,18 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
 };
 
 // Create a post
-export const createEvent = async (name: string, description?: string, startTime?:string): Promise<Event> => {
+export const createEvent = async (
+  name: string,
+  description?: string,
+  startTime?: string,
+): Promise<Event> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       const user = getAuthenticatedUser();
-      const newEvent: Event = { 
-        id: nanoid(), 
+      const newEvent: Event = {
+        id: nanoid(),
         userId: user.id,
-        name, 
+        name,
         description,
         startTime: startTime || new Date().toISOString(),
       };
@@ -51,7 +55,6 @@ export const createEvent = async (name: string, description?: string, startTime?
     }, 200); // Simulate an API delay
   });
 };
-
 
 // Delete event by id
 export const deleteEvent = async (id: string): Promise<void> => {
@@ -62,4 +65,3 @@ export const deleteEvent = async (id: string): Promise<void> => {
     }, 200); // Simulate an API delay
   });
 };
-

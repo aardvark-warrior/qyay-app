@@ -1,12 +1,25 @@
-import { Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
-import { EventService } from './event.service';
-import { CreateEventDTO } from './create-event.dto';
-import { EventResponseDTO } from './event-response.dto';
-import { UpdateEventDTO } from './update-event.dto';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { UserId } from 'src/decorators/user-id.decorator';
-import { EventOwnershipGuard } from 'src/guards/event-owner.guard';
-import { UserService } from 'src/user/user.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  ForbiddenException,
+  Get,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
+import { EventService } from "./event.service";
+import { CreateEventDTO } from "./create-event.dto";
+import { EventResponseDTO } from "./event-response.dto";
+import { UpdateEventDTO } from "./update-event.dto";
+import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
+import { UserId } from "src/decorators/user-id.decorator";
+import { EventOwnershipGuard } from "src/guards/event-owner.guard";
+import { UserService } from "src/user/user.service";
 
 type EventResponseWithPagination = {
   filter?: string;
@@ -18,7 +31,7 @@ type EventResponseWithPagination = {
   };
 };
 
-@Controller('events')
+@Controller("events")
 export class EventController {
   constructor(
     private eventService: EventService,
@@ -27,24 +40,26 @@ export class EventController {
 
   @Get()
   async findAll(
-    @Query('limit') limit: number = 10,
-    @Query('offset') offset: number = 0,
-    @Query('search') search: string,
-    @Query('username') username?: string,
+    @Query("limit") limit: number = 10,
+    @Query("offset") offset: number = 0,
+    @Query("search") search: string,
+    @Query("username") username?: string,
   ): Promise<EventResponseWithPagination> {
     let userId: number | undefined;
 
     if (username) {
       const user = await this.userService.findOne(username);
       if (!user) {
-        throw new NotFoundException('User with username ${username} not found.')
+        throw new NotFoundException(
+          "User with username ${username} not found.",
+        );
       }
       userId = user.id;
     }
 
     const events = await this.eventService.findAll(
-      limit, 
-      offset, 
+      limit,
+      offset,
       search,
       userId,
     );
@@ -53,7 +68,7 @@ export class EventController {
       filter: username,
       search,
       pagination: {
-        limit, 
+        limit,
         offset,
       },
       data: events.map((event) => {
@@ -67,8 +82,8 @@ export class EventController {
     // });
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<EventResponseDTO> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<EventResponseDTO> {
     const event = await this.eventService.findOne(id);
     if (!event) {
       throw new NotFoundException(`Event with ID ${id} not found`);
@@ -89,9 +104,9 @@ export class EventController {
   }
 
   @UseGuards(JwtAuthGuard, EventOwnershipGuard)
-  @Patch(':id')
+  @Patch(":id")
   async update(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() updateEventDto: UpdateEventDTO,
   ): Promise<EventResponseDTO> {
     const event = await this.eventService.update(id, updateEventDto);
@@ -100,14 +115,14 @@ export class EventController {
   }
 
   @UseGuards(JwtAuthGuard, EventOwnershipGuard)
-  @Delete(':id')
+  @Delete(":id")
   async remove(
-    @Param('id') id: string,
+    @Param("id") id: string,
   ): Promise<{ statusCode: number; message: string }> {
     await this.eventService.remove(id);
     return {
       statusCode: 200,
-      message: 'Event deleted successfully',
+      message: "Event deleted successfully",
     };
   }
 }
