@@ -26,8 +26,18 @@ export class EventService {
     return this.eventRepository.findOneBy({ id });
   }
 
-  async findAll(): Promise<Event[]> {
-    return this.eventRepository.find();
+  async findAll(
+    limit: number,
+    offset: number
+  ): Promise<Event[]> {
+    const queryBuilder = this.eventRepository.createQueryBuilder('events');
+
+    queryBuilder.limit(limit);
+    queryBuilder.offset(offset);
+
+    queryBuilder.orderBy('events.startTime', 'ASC');
+
+    return queryBuilder.getMany();
   }
 
   // Update

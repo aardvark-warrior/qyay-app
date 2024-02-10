@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, ForbiddenException, Get, NotFoundException, Param, Patch, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDTO } from './create-event.dto';
 import { EventResponseDTO } from './event-response.dto';
@@ -7,19 +7,40 @@ import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/user-id.decorator';
 import { EventOwnershipGuard } from 'src/guards/event-owner.guard';
 
+type EventResponseWithPagination = {
+  data: EventResponseDTO[];
+  pagination: {
+    limit: number;
+    offset: number;
+  };
+};
+
 @Controller('events')
 export class EventController {
   constructor(
     private eventService: EventService
   ) {}
-  
+
   @Get()
-  async findAll(): Promise<EventResponseDTO[]> {
-    const events = await this.eventService.findAll();
-    return events.map((event) => {
-      delete event.userId;
-      return event;
-    });
+  async findAll(
+    @Query('limit') limit: number = 10,
+    @Query('offset') offset: number = 0,
+  ): Promise<EventResponseWithPagination> {
+    const events = await this.eventService.findAll(limit, offset);
+    return {
+      pagination: {
+        limit, 
+        offset,
+      },
+      data: events.map((event) => {
+        delete event.userId;
+        return event;
+      }),
+    };
+    // return events.map((event) => {
+    //   delete event.userId;
+    //   return event;
+    // });
   }
 
   @Get(':id')
