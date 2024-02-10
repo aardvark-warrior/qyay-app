@@ -12,6 +12,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  displayName: string;
+
   @OneToMany(() => Event, (event) => event.user)
   events: Event[];
 }

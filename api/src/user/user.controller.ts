@@ -3,6 +3,7 @@ import { UserService } from "./user.service";
 import { CreateUserDTO } from "./create-user.dto";
 import { AuthService } from "src/auth/auth.service";
 import { UserResponseDTO } from "./user-reponse.dto";
+import { UserLoginDTO } from "./user-login.dto";
 
 @Controller("users") // endpoint name
 export class UserController {
@@ -24,7 +25,7 @@ export class UserController {
   @Post("login")
   // prev: Promise<UserResponseDTO>
   async login(
-    @Body() userDto: CreateUserDTO,
+    @Body() userDto: UserLoginDTO,
   ): Promise<{ access_token: string }> {
     const user = await this.authService.validateUser(
       userDto.username,
