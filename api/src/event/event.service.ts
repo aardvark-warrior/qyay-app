@@ -31,8 +31,14 @@ export class EventService {
     offset: number,
     search?: string,
     userId?: number,
+    withUserData?: boolean,
   ): Promise<Event[]> {
     const queryBuilder = this.eventRepository.createQueryBuilder("events");
+
+    if (withUserData) {
+      queryBuilder.leftJoinAndSelect("events.user", "user");
+    }
+
     let hasWhereCondition = false;
 
     if (search !== undefined) {

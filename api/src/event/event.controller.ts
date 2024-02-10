@@ -44,6 +44,7 @@ export class EventController {
     @Query("offset") offset: number = 0,
     @Query("search") search: string,
     @Query("username") username?: string,
+    @Query("withUserData") withUserData?: boolean,
   ): Promise<EventResponseWithPagination> {
     let userId: number | undefined;
 
@@ -62,6 +63,7 @@ export class EventController {
       offset,
       search,
       userId,
+      withUserData,
     );
 
     return {
@@ -73,6 +75,9 @@ export class EventController {
       },
       data: events.map((event) => {
         delete event.userId;
+        if (event.user) {
+          delete event.user.password;
+        }
         return event;
       }),
     };
