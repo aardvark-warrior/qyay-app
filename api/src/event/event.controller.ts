@@ -20,16 +20,8 @@ import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { UserId } from "src/decorators/user-id.decorator";
 import { EventOwnershipGuard } from "src/guards/event-owner.guard";
 import { UserService } from "src/user/user.service";
-
-type EventResponseWithPagination = {
-  filter?: string;
-  search?: string;
-  data: EventResponseDTO[];
-  pagination: {
-    limit: number;
-    offset: number;
-  };
-};
+import { FindEventsQueryDTO } from "./find-events-query.dto";
+import { FindEventsResponseDTO } from "./find-events-response.dto";
 
 @Controller("events")
 export class EventController {
@@ -40,12 +32,15 @@ export class EventController {
 
   @Get()
   async findAll(
-    @Query("limit") limit: number = 10,
-    @Query("offset") offset: number = 0,
-    @Query("search") search: string,
-    @Query("username") username?: string,
-    @Query("withUserData") withUserData?: boolean,
-  ): Promise<EventResponseWithPagination> {
+    @Query() query: FindEventsQueryDTO,
+    // @Query("limit") limit: number = 10,
+    // @Query("offset") offset: number = 0,
+    // @Query("search") search?: string,
+    // @Query("username") username?: string,
+    // @Query("withUserData") withUserData?: boolean,
+  ): Promise<FindEventsResponseDTO> {
+    const { limit, offset, search, username, withUserData } = query;
+
     let userId: number | undefined;
 
     if (username) {
@@ -67,24 +62,19 @@ export class EventController {
     );
 
     return {
-      filter: username,
+      limit,
+      offset,
       search,
-      pagination: {
-        limit,
-        offset,
-      },
+      username,
+      withUserData,
       data: events.map((event) => {
         delete event.userId;
         if (event.user) {
           delete event.user.password;
         }
-        return event;
+        return event as EventResponseDTO;
       }),
     };
-    // return events.map((event) => {
-    //   delete event.userId;
-    //   return event;
-    // });
   }
 
   @Get(":id")
