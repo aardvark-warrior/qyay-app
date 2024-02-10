@@ -4,12 +4,13 @@ export type Event = {
   // User-entered fields
   name: string;
   description?: string;
-  startTime?: string;
+  startTime: string;
 };
 
 export type User = {
   id: number;
   username: string;
+  displayName: string;
 };
 
 export type EventWithUserData = Event & { user?: User };
