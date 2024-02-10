@@ -30,13 +30,25 @@ export class EventService {
     limit: number,
     offset: number,
     search?: string,
+    userId?: number,
   ): Promise<Event[]> {
     const queryBuilder = this.eventRepository.createQueryBuilder('events');
+    let hasWhereCondition = false;
 
     if (search !== undefined) {
       queryBuilder.where('events.name ILIKE :search', {
         search: `%${search}%`,
       });
+      hasWhereCondition = true;
+    }
+
+    if (userId !== undefined) {
+      if (hasWhereCondition) {
+        queryBuilder.andWhere('events.userId = :userId', { userId });
+      } else {
+        queryBuilder.where('events.userId = :userId', { userId });
+        hasWhereCondition = true;
+      }
     }
 
     queryBuilder.limit(limit);

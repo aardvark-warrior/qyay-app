@@ -6,8 +6,10 @@ import { UpdateEventDTO } from './update-event.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UserId } from 'src/decorators/user-id.decorator';
 import { EventOwnershipGuard } from 'src/guards/event-owner.guard';
+import { UserService } from 'src/user/user.service';
 
 type EventResponseWithPagination = {
+  filter?: string;
   search?: string;
   data: EventResponseDTO[];
   pagination: {
@@ -19,7 +21,8 @@ type EventResponseWithPagination = {
 @Controller('events')
 export class EventController {
   constructor(
-    private eventService: EventService
+    private eventService: EventService,
+    private userService: UserService,
   ) {}
 
   @Get()
@@ -27,9 +30,27 @@ export class EventController {
     @Query('limit') limit: number = 10,
     @Query('offset') offset: number = 0,
     @Query('search') search: string,
+    @Query('username') username?: string,
   ): Promise<EventResponseWithPagination> {
-    const events = await this.eventService.findAll(limit, offset, search);
+    let userId: number | undefined;
+
+    if (username) {
+      const user = await this.userService.findOne(username);
+      if (!user) {
+        throw new NotFoundException('User with username ${username} not found.')
+      }
+      userId = user.id;
+    }
+
+    const events = await this.eventService.findAll(
+      limit, 
+      offset, 
+      search,
+      userId,
+    );
+
     return {
+      filter: username,
       search,
       pagination: {
         limit, 
