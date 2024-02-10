@@ -24,7 +24,7 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   return new Promise((resolve) => {
     setTimeout(async () => {
       const sortedEvents = db.events.sort(
-        (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
+        (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
       );
       const eventsWithUserData = await Promise.all(
         sortedEvents.map(async (event) => {
