@@ -41,7 +41,7 @@ export const useStore = create<State & Action>()(
         ...event,
         user,
       };
-      const newEvents = { ...get().events, newEventWithUserData };
+      const newEvents = { newEventWithUserData, ...get().events };
       set({ events: newEvents });
     },
   })),

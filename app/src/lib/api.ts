@@ -23,8 +23,11 @@ export const findUser = async (id: number): Promise<User | undefined> => {
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   return new Promise((resolve) => {
     setTimeout(async () => {
+      const sortedEvents = db.events.sort(
+        (a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
+      );
       const eventsWithUserData = await Promise.all(
-        db.events.map(async (event) => {
+        sortedEvents.map(async (event) => {
           const user = await findUser(event.userId);
           return { ...event, user };
         }),
