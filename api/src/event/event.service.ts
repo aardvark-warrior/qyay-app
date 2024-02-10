@@ -28,9 +28,16 @@ export class EventService {
 
   async findAll(
     limit: number,
-    offset: number
+    offset: number,
+    search?: string,
   ): Promise<Event[]> {
     const queryBuilder = this.eventRepository.createQueryBuilder('events');
+
+    if (search !== undefined) {
+      queryBuilder.where('events.name ILIKE :search', {
+        search: `%${search}%`,
+      });
+    }
 
     queryBuilder.limit(limit);
     queryBuilder.offset(offset);

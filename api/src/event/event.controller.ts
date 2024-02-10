@@ -8,6 +8,7 @@ import { UserId } from 'src/decorators/user-id.decorator';
 import { EventOwnershipGuard } from 'src/guards/event-owner.guard';
 
 type EventResponseWithPagination = {
+  search?: string;
   data: EventResponseDTO[];
   pagination: {
     limit: number;
@@ -25,9 +26,11 @@ export class EventController {
   async findAll(
     @Query('limit') limit: number = 10,
     @Query('offset') offset: number = 0,
+    @Query('search') search: string,
   ): Promise<EventResponseWithPagination> {
-    const events = await this.eventService.findAll(limit, offset);
+    const events = await this.eventService.findAll(limit, offset, search);
     return {
+      search,
       pagination: {
         limit, 
         offset,
