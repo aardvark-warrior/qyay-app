@@ -1,9 +1,10 @@
 import type { User, Event, EventWithUserData } from "@/lib/types";
 import { getAuthenticatedUser, getAuthenticatedUserToken, removeAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
-  const API_URL = import.meta.env.VITE_API_URL;
   console.log(API_URL);
   const response = await fetch(`${API_URL}/events?withUserData=true`);
   const responseJson = await response.json();
@@ -28,7 +29,6 @@ export const createEvent = async (
   const user = getAuthenticatedUser();
   const token = getAuthenticatedUserToken();
 
-  const API_URL = import.meta.env.VITE_API_URL;
   const response = await fetch(`${API_URL}/events`, {
     method: "POST",
     headers: {
@@ -57,7 +57,6 @@ export const createEvent = async (
 export const deleteEvent = async (id: string): Promise<void> => {
   const token = getAuthenticatedUserToken();
   
-  const API_URL = import.meta.env.VITE_API_URL;
   const response = await fetch(`${API_URL}/events/${id}`, {
     method: "DELETE",
     headers: {
@@ -79,7 +78,6 @@ export const login = async (
   username: string,
   password: string,
 ): Promise<User> => {
-  const API_URL = import.meta.env.VITE_API_URL;
   const response = await fetch(`${API_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -115,3 +113,29 @@ export const logout = async (): Promise<void> => {
   // Here we just clear the token
   removeAuthenticatedUserToken();
 };
+
+// Register a new user
+export const register = async (
+  username: string,
+  password: string,
+  displayName: string,
+  avatar?: string,
+): Promise<void> => {
+  const response = await fetch(`${API_URL}/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password, displayName, avatar }),
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error: ${response.status} - ${
+        responseJson.message || response.statusText
+      }`,
+    );
+  }
+};
+

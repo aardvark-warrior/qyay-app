@@ -1,4 +1,4 @@
-import { login, logout } from "@/lib/api";
+import { login, logout, register } from "@/lib/api";
 import { useStore } from "@/lib/store";
 import { useToast } from "@/components/ui/use-toast";
 import { useEffect } from "react";
@@ -39,6 +39,31 @@ function useMutationUser() {
     }
   };
 
+  const registerUser = async (
+    username: string,
+    password: string,
+    displayName: string,
+    avatar?: string,
+  ) => {
+    try {
+      await register(username, password, displayName, avatar);
+      toast({
+        variant: "default",
+        title: "Registration successful",
+        description: "Please login with your credentials.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to register",
+        description:
+          (error as Error).message ||
+          "There was an error registering you. Please try again later.",
+      });
+    }
+  };
+
+
   useEffect(() => {
     try {
       const user = getAuthenticatedUser();
@@ -48,7 +73,7 @@ function useMutationUser() {
     }
   }, []);
 
-  return { loginUser, logoutUser };
+  return { loginUser, logoutUser, registerUser };
 }
 
 export default useMutationUser;
