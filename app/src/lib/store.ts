@@ -44,6 +44,6 @@ export const useStore = create<State & Action>()(
 
     setUser: (user) => set({ user }),
 
-    clearUser: () => set({ user: null}),
+    clearUser: () => set({ user: null }),
   })),
 );

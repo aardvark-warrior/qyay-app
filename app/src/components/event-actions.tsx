@@ -3,15 +3,15 @@ import { Button } from "./ui/button";
 import useMutationsEvents from "@/hooks/use-mutations-events";
 import { useEffect, useState } from "react";
 
-const EventActions = ({ 
+const EventActions = ({
   eventId,
-  username, 
-}: { 
+  username,
+}: {
   eventId: string;
   username?: string;
 }) => {
   const { deleteEventById } = useMutationsEvents();
-  const { user } = useStore((state) => state)
+  const { user } = useStore((state) => state);
   const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
@@ -26,13 +26,13 @@ const EventActions = ({
     <div className="">
       {isOwner && (
         <div>
-            <Button 
-              variant="ghost" 
-              size="sm"
-              //TODO: add editEvent dialog
-            >
-              Edit Event
-            </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            //TODO: add editEvent dialog
+          >
+            Edit Event
+          </Button>
         </div>
       )}
       {isOwner && (

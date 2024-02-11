@@ -59,7 +59,7 @@ export const AddEventDialog = () => {
         {user && (
           <div className="grid gap-4 py-4">
             <div className="grid items-center grid-cols-4 gap-4">
-              <Textarea 
+              <Textarea
                 id="name"
                 value={name}
                 className="col-span-4"
@@ -72,9 +72,9 @@ export const AddEventDialog = () => {
         )}
         <DialogFooter>
           {!user && (
-          <DialogClose asChild>
-            <Button>Okay</Button>
-          </DialogClose>
+            <DialogClose asChild>
+              <Button>Okay</Button>
+            </DialogClose>
           )}
           {user && (
             <DialogClose asChild>

@@ -2,7 +2,7 @@ import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
 
 const Event = ({ event }: { event: EventWithUserData }) => {
-  const { id, name, description, startTime, user} = event;
+  const { id, name, description, startTime, user } = event;
   return (
     <div className="p-4 border-b-2 border-slate-400">
       <EventHeader

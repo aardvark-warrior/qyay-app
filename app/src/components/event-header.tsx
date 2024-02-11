@@ -20,10 +20,12 @@ const EventHeader = ({
     <div className="flex justify-between">
       <div>
         <p className="font-semibold">{eventName}</p>
-        <p className="text-muted-foreground">Host: {displayName || "Unknown"}</p>
+        <p className="text-muted-foreground">
+          Host: {displayName || "Unknown"}
+        </p>
         <p className="opacity-30">{formatTimestamp(startTime)}</p>
       </div>
-      <EventActions eventId={eventId} username={username}/>
+      <EventActions eventId={eventId} username={username} />
     </div>
   );
 };

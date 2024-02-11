@@ -6,11 +6,12 @@ import { HttpResponseInterceptor } from "./interceptors/http-response.intercepto
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: { // <-- Add this option
+    cors: {
+      // <-- Add this option
       origin: process.env.CLIENT_URL,
     },
   });
-  
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true, // Enable transformation

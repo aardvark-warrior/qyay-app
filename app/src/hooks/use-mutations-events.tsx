@@ -40,7 +40,6 @@ function useMutationsEvents() {
       });
     }
   };
-  
 
   return { addNewEvent, deleteEventById };
 }

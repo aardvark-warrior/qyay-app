@@ -1,7 +1,24 @@
 import type { User, Event, EventWithUserData } from "@/lib/types";
-import { getAuthenticatedUser, getAuthenticatedUserToken, removeAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
+import {
+  getAuthenticatedUser,
+  getAuthenticatedUserToken,
+  removeAuthenticatedUserToken,
+  storeAuthenticatedUserToken,
+} from "./auth";
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+const handleError = (response: Response, message?: string) => {
+  if (response.status === 401) {
+    removeAuthenticatedUserToken();
+    throw new Error("Your session has expired. Please login again.");
+  }
+
+  throw new Error(
+    `Error: ${response.status} - ${message || response.statusText}`,
+  );
+};
+
 
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
@@ -40,11 +57,12 @@ export const createEvent = async (
   const responseJson = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      `Error: ${response.status} - ${
-        responseJson.message || response.statusText
-      }`,
-    );
+    handleError(response, responseJson.message);
+    // throw new Error(
+    //   `Error: ${response.status} - ${
+    //     responseJson.message || response.statusText
+    //   }`,
+    // );
   }
 
   return {
@@ -56,7 +74,7 @@ export const createEvent = async (
 // Delete event by id
 export const deleteEvent = async (id: string): Promise<void> => {
   const token = getAuthenticatedUserToken();
-  
+
   const response = await fetch(`${API_URL}/events/${id}`, {
     method: "DELETE",
     headers: {
@@ -66,11 +84,12 @@ export const deleteEvent = async (id: string): Promise<void> => {
   const responseJson = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      `Error: ${response.status} - ${
-        responseJson.message || response.statusText
-      }`,
-    );
+    handleError(response, responseJson.message);
+    // throw new Error(
+    //   `Error: ${response.status} - ${
+    //     responseJson.message || response.statusText
+    //   }`,
+    // );
   }
 };
 
@@ -138,4 +157,3 @@ export const register = async (
     );
   }
 };
-

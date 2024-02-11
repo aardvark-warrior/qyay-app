@@ -7,7 +7,7 @@ import { getAuthenticatedUser } from "@/lib/auth";
 function useMutationUser() {
   const { toast } = useToast();
   const setUser = useStore((state) => state.setUser);
-    const clearUser = useStore((state) => state.clearUser);
+  const clearUser = useStore((state) => state.clearUser);
 
   const loginUser = async (username: string, password: string) => {
     try {
@@ -62,7 +62,6 @@ function useMutationUser() {
       });
     }
   };
-
 
   useEffect(() => {
     try {

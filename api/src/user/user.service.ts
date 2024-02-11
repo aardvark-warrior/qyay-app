@@ -23,7 +23,7 @@ export class UserService {
     const user = await this.userRepository.create({
       ...userInfo,
       password: await bcrypt.hash(createUserDto.password, 10),
-    })
+    });
     // const user = new User();
     // user.username = userDto.username;
     // user.password = await bcrypt.hash(userDto.password, 10);

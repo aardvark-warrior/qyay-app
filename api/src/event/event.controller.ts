@@ -68,7 +68,7 @@ export class EventController {
           delete event.user.password;
         }
         return event as EventResponseDTO;
-      })
+      }),
     };
   }
 
