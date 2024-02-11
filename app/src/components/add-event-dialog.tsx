@@ -11,11 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import useMutationEvents from "@/hooks/use-mutations-events";
 import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "./ui/textarea";
 
 export const AddEventDialog = () => {
   const { toast } = useToast();
@@ -46,7 +45,7 @@ export const AddEventDialog = () => {
           <PlusCircledIcon className="w-5 h-5" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Add Event</DialogTitle>
           <DialogDescription>
@@ -55,13 +54,10 @@ export const AddEventDialog = () => {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="title" className="text-right">
-              Event Name
-            </Label>
-            <Input
+            <Textarea 
               id="name"
               value={name}
-              className="col-span-3"
+              className="col-span-4"
               onChange={(e) => {
                 setName(e.target.value);
               }}

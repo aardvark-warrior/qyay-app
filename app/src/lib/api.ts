@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { users, events } from "@/lib/data";
 import type { User, Event, EventWithUserData } from "@/lib/types";
-import { getAuthenticatedUser } from "./auth";
+import { getAuthenticatedUser, getAuthenticatedUserToken } from "./auth";
 
 // Mock database
 const db = {
@@ -43,20 +43,46 @@ export const createEvent = async (
   description?: string,
   startTime?: string,
 ): Promise<Event> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const user = getAuthenticatedUser();
-      const newEvent: Event = {
-        id: nanoid(),
-        userId: user.id,
-        name,
-        description,
-        startTime: startTime || new Date().toISOString(),
-      };
-      db.events.push(newEvent);
-      resolve(newEvent);
-    }, 200); // Simulate an API delay
+  const user = getAuthenticatedUser();
+  const token = getAuthenticatedUserToken();
+
+  const API_URL = import.meta.env.VITE_API_URL;
+  const response = await fetch(`${API_URL}/events`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, description, startTime }),
   });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error: ${response.status} - ${
+        responseJson.message || response.statusText
+      }`,
+    );
+  }
+
+  return {
+    ...responseJson.data,
+    user: user,
+  };
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     const user = getAuthenticatedUser();
+  //     const newEvent: Event = {
+  //       id: nanoid(),
+  //       userId: user.id,
+  //       name,
+  //       description,
+  //       startTime: startTime || new Date().toISOString(),
+  //     };
+  //     db.events.push(newEvent);
+  //     resolve(newEvent);
+  //   }, 200); // Simulate an API delay
+  // });
 };
 
 // Delete event by id

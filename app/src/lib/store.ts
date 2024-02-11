@@ -1,8 +1,7 @@
-import { Event, EventWithUserData } from "./types";
+import { EventWithUserData } from "./types";
 // import { log } from "./logger";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { getAuthenticatedUser } from "./auth";
 
 type State = {
   events: EventWithUserData[];
@@ -12,7 +11,7 @@ type State = {
 type Action = {
   setEvents: (events: EventWithUserData[]) => void;
   removeEvent: (id: string) => void;
-  addEvent: (event: Event) => void;
+  addEvent: (event: EventWithUserData) => void;
   // Add more actions
 };
 
@@ -36,13 +35,7 @@ export const useStore = create<State & Action>()(
     },
 
     addEvent: (event) => {
-      const user = getAuthenticatedUser();
-      const newEventWithUserData: EventWithUserData = {
-        ...event,
-        user,
-      };
-      const newEvents = { newEventWithUserData, ...get().events };
-      set({ events: newEvents });
+      set({ events: [...get().events, event] });
     },
   })),
 );
