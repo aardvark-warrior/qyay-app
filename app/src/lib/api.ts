@@ -1,5 +1,5 @@
 import type { User, Event, EventWithUserData } from "@/lib/types";
-import { getAuthenticatedUser, getAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
+import { getAuthenticatedUser, getAuthenticatedUserToken, removeAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
 
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
@@ -107,4 +107,11 @@ export const login = async (
   storeAuthenticatedUserToken(access_token);
   const user = getAuthenticatedUser();
   return user;
+};
+
+// Logout and clear the token
+export const logout = async (): Promise<void> => {
+  // You can send a request to the server to perform server-side logout
+  // Here we just clear the token
+  removeAuthenticatedUserToken();
 };

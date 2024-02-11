@@ -1,4 +1,4 @@
-import { login } from "@/lib/api";
+import { login, logout } from "@/lib/api";
 import { useStore } from "@/lib/store";
 import { useToast } from "@/components/ui/use-toast";
 import { useEffect } from "react";
@@ -24,7 +24,22 @@ function useMutationUser() {
     }
   };
 
-    useEffect(() => {
+  const logoutUser = async () => {
+    try {
+      await logout();
+      clearUser();
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to logout",
+        description:
+          (error as Error).message ||
+          "There was an error signing you out. Please try again later.",
+      });
+    }
+  };
+
+  useEffect(() => {
     try {
       const user = getAuthenticatedUser();
       setUser(user);
@@ -33,7 +48,7 @@ function useMutationUser() {
     }
   }, []);
 
-  return { loginUser };
+  return { loginUser, logoutUser };
 }
 
 export default useMutationUser;
