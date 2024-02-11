@@ -1,4 +1,4 @@
-import { EventWithUserData, User } from "./types";
+import { EventWithUserData, Question, User } from "./types";
 // import { log } from "./logger";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
@@ -6,15 +6,25 @@ import { immer } from "zustand/middleware/immer";
 type State = {
   events: EventWithUserData[];
   user: User | null;
+  questions: Question[];
+  selectedEventId: string | null;
   // Add more state variables
 };
 
 type Action = {
+  // Event
   setEvents: (events: EventWithUserData[]) => void;
   removeEvent: (id: string) => void;
   addEvent: (event: EventWithUserData) => void;
+  // User
   setUser: (user: User) => void;
   clearUser: () => void;
+  // Question
+  setQuestions: (questions: Question[]) => void;
+  addQuestion: (question: Question) => void;
+  clearQuestions: () => void;
+  setSelectedEventId: (id: string) => void;
+  clearSelectedEventId: () => void;
   // Add more actions
 };
 
@@ -22,6 +32,8 @@ type Action = {
 const initialState: State = {
   events: [],
   user: null,
+  questions: [],
+  selectedEventId: null,
 };
 
 export const useStore = create<State & Action>()(
@@ -45,5 +57,17 @@ export const useStore = create<State & Action>()(
     setUser: (user) => set({ user }),
 
     clearUser: () => set({ user: null }),
+
+    setQuestions: (questions) => set({ questions }),
+
+    addQuestion: (question) => {
+      set({ questions: [question, ...get().questions] });
+    },
+
+    clearQuestions: () => set({ questions: [] }),
+
+    setSelectedEventId: (id) => set({ selectedEventId: id }),
+
+    clearSelectedEventId: () => set({ selectedEventId: null }),
   })),
 );
