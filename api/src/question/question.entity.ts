@@ -20,12 +20,12 @@ export class Question {
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
   timestamp: Date;
 
-  @ManyToOne(() => User, (user) => user.events)
-  @JoinColumn({ name: "userId" })
-  user: User;
+  // @ManyToOne(() => User, (user) => user.events)
+  // @JoinColumn({ name: "userId" })
+  // user: User;
 
-  @Column()
-  userId: number;
+  // @Column()
+  // userId: number;
 
   @ManyToOne(() => Event, (event) => event.questions)
   @JoinColumn({ name: "eventId" })

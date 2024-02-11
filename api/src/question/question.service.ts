@@ -16,17 +16,11 @@ export class QuestionService {
     limit: number,
     offset: number,
     eventId?: string,
-    userId?: number,
     search?: string,
-    withUserData?: boolean,
     withEventData?: boolean,
   ): Promise<Question[]> {
     const content = search ? ILike(`%${search}%`) : undefined;
     const relations = [];
-
-    if (withUserData) {
-      relations.push("user");
-    }
 
     if (withEventData) {
       relations.push("event");
@@ -38,7 +32,6 @@ export class QuestionService {
       where: [
         {
           eventId,
-          userId,
           content,
         },
       ],
@@ -56,12 +49,10 @@ export class QuestionService {
   async create(
     createQuestionDto: CreateQuestionDTO,
     eventId: string,
-    userId: number,
   ): Promise<Question> {
     const question = this.questionRepository.create({
       ...createQuestionDto,
       eventId, // Associate the question with an event
-      userId, // Associate the question with a user
     });
 
     return this.questionRepository.save(question);

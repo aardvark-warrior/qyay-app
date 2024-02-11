@@ -18,7 +18,4 @@ export class User {
 
   @OneToMany(() => Event, (event) => event.user)
   events: Event[];
-
-  @OneToMany(() => Question, (question) => question.user)
-  questions: Question[];
 }
