@@ -8,8 +8,18 @@ function useMutationsEvents() {
   const removeEvent = useStore((state) => state.removeEvent);
 
   const deleteEventById = async (eventId: string) => {
-    await deleteEvent(eventId); // API call to delete data from Backend
-    removeEvent(eventId); // Zustand Action call to update Global states for Frontend
+    try {
+      await deleteEvent(eventId); // API call to delete data from Backend
+      removeEvent(eventId); // Zustand Action call to update Global states for Frontend
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to delete the event",
+        description:
+          (error as Error).message ||
+          "There was an error deleting the event. Please try again later.",
+      });
+    }
   };
 
   const addNewEvent = async (
@@ -23,10 +33,10 @@ function useMutationsEvents() {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Failed to create the post",
+        title: "Failed to create the event",
         description:
           (error as Error).message ||
-          "There was an error creating the post. Please try again later.",
+          "There was an error creating the event. Please try again later.",
       });
     }
   };
