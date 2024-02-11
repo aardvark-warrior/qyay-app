@@ -42,11 +42,10 @@ function useMutationUser() {
   const registerUser = async (
     username: string,
     password: string,
-    displayName: string,
-    avatar?: string,
+    displayName: string
   ) => {
     try {
-      await register(username, password, displayName, avatar);
+      await register(username, password, displayName);
       toast({
         variant: "default",
         title: "Registration successful",

@@ -137,15 +137,14 @@ export const logout = async (): Promise<void> => {
 export const register = async (
   username: string,
   password: string,
-  displayName: string,
-  avatar?: string,
+  displayName: string
 ): Promise<void> => {
   const response = await fetch(`${API_URL}/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, password, displayName, avatar }),
+    body: JSON.stringify({ username, password, displayName }),
   });
   const responseJson = await response.json();
 

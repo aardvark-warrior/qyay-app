@@ -20,7 +20,6 @@ export const RegisterDialog = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
   const { toast } = useToast();
   const { registerUser } = useMutationUser();
 
@@ -28,7 +27,6 @@ export const RegisterDialog = () => {
     setUsername("");
     setPassword("");
     setDisplayName("");
-    setAvatarUrl("");
   };
 
   const handleSave = async () => {
@@ -41,7 +39,7 @@ export const RegisterDialog = () => {
       return;
     }
 
-    registerUser(username, password, displayName, avatarUrl);
+    registerUser(username, password, displayName);
 
     clearFields();
   };
@@ -105,19 +103,6 @@ export const RegisterDialog = () => {
               }}
             />
           </div>
-          {/* <div className="grid items-center grid-cols-4 gap-4">
-            <Label htmlFor="avatarUrl" className="text-right">
-              Avatar URL
-            </Label>
-            <Input
-              id="avatarUrl"
-              value={avatarUrl}
-              className="col-span-3"
-              onChange={(e) => {
-                setAvatarUrl(e.target.value);
-              }}
-            />
-          </div> */}
         </div>
         <DialogFooter>
           <DialogClose asChild>
