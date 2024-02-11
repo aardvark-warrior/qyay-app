@@ -1,10 +1,12 @@
 import { User } from "src/user/user.entity";
+import { Question } from "src/question/question.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -37,4 +39,7 @@ export class Event {
 
   @Column()
   userId: number;
+
+  @OneToMany(() => Question, (question) => question.event)
+  questions: Question[];
 }

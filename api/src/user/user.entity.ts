@@ -1,4 +1,5 @@
 import { Event } from "src/event/event.entity";
+import { Question } from "src/question/question.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -17,4 +18,7 @@ export class User {
 
   @OneToMany(() => Event, (event) => event.user)
   events: Event[];
+
+  @OneToMany(() => Question, (question) => question.user)
+  questions: Question[];
 }
