@@ -13,6 +13,7 @@ import { EventModule } from "./event/event.module";
 import { AuthService } from "./auth/auth.service";
 import { PassportModule } from "@nestjs/passport";
 import { LocalStrategy } from "./auth/local.strategy";
+import { QuestionModule } from './question/question.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { LocalStrategy } from "./auth/local.strategy";
       inject: [ConfigService],
     }),
     EventModule,
+    QuestionModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, LocalStrategy, UserService, JwtStrategy],
