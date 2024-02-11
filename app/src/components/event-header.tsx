@@ -7,12 +7,14 @@ const EventHeader = ({
   // creator,
   startTime,
   displayName,
+  username,
 }: {
   eventId: string;
   eventName: string;
   // creator: number;
   startTime: string;
   displayName?: string;
+  username?: string;
 }) => {
   return (
     <div className="flex justify-between">
@@ -21,7 +23,7 @@ const EventHeader = ({
         <p className="text-muted-foreground">Host: {displayName || "Unknown"}</p>
         <p className="opacity-30">{formatTimestamp(startTime)}</p>
       </div>
-      <EventActions eventId={eventId} />
+      <EventActions eventId={eventId} username={username}/>
     </div>
   );
 };

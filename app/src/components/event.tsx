@@ -11,6 +11,7 @@ const Event = ({ event }: { event: EventWithUserData }) => {
         // creator={userId}
         startTime={startTime}
         displayName={user?.displayName}
+        username={user?.username}
       />
       <div className="font-thin">{description}</div>
     </div>
