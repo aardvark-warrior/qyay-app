@@ -1,4 +1,4 @@
-import type { User, Event, EventWithUserData } from "@/lib/types";
+import type { User, Event, EventWithUserData, Question } from "@/lib/types";
 import {
   getAuthenticatedUser,
   getAuthenticatedUserToken,
@@ -21,22 +21,17 @@ const handleError = (response: Response, message?: string) => {
 
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
-  console.log(API_URL);
   const response = await fetch(`${API_URL}/events?withUserData=true`);
   const responseJson = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      `Error: ${response.status} - ${
-        responseJson.message || response.statusText
-      }`,
-    );
+    handleError(response, responseJson.message);
   }
 
   return responseJson.data;
 };
 
-// Create a post
+// Create an event
 export const createEvent = async (
   name: string,
   description?: string,
@@ -155,3 +150,38 @@ export const register = async (
     );
   }
 };
+
+// Fetch all questions for an event
+export const fetchQuestions = async (eventId: string): Promise<Question[]> => {
+  const response = await fetch(`${API_URL}/events/${eventId}/questions`);
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
+// Create a new question
+export const createQuestion = async (
+  eventId: string,
+  content: string,
+): Promise<Question> => {
+  const response = await fetch(`${API_URL}/posts/${eventId}/questions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ content }),
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
+

@@ -7,6 +7,12 @@ export type Event = {
   startTime: string;
 };
 
+export type Question = {
+  id: string;
+  content: string;
+  timestamp: string;
+}
+
 export type User = {
   id: number;
   username: string;
