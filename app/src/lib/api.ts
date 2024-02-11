@@ -1,23 +1,5 @@
-import { nanoid } from "nanoid";
-import { users, events } from "@/lib/data";
 import type { User, Event, EventWithUserData } from "@/lib/types";
-import { getAuthenticatedUser, getAuthenticatedUserToken } from "./auth";
-
-// Mock database
-const db = {
-  users: [...users],
-  events: [...events],
-};
-
-// Helper function to find a user by ID
-export const findUser = async (id: number): Promise<User | undefined> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const user = db.users.find((user) => user.id === id);
-      resolve(user);
-    }, 200); // Simulate an API delay
-  });
-};
+import { getAuthenticatedUser, getAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
 
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
@@ -91,4 +73,38 @@ export const deleteEvent = async (id: string): Promise<void> => {
       }`,
     );
   }
+};
+
+export const login = async (
+  username: string,
+  password: string,
+): Promise<User> => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const response = await fetch(`${API_URL}/users/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error: ${response.status} - ${
+        responseJson.message || response.statusText
+      }`,
+    );
+  }
+
+  const { access_token } = responseJson.data;
+
+  if (!access_token) {
+    throw new Error("Authentication token is missing from the response!");
+  }
+
+  storeAuthenticatedUserToken(access_token);
+  const user = getAuthenticatedUser();
+  return user;
 };

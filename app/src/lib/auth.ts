@@ -23,6 +23,11 @@ export const removeAuthenticatedUserToken = (): void => {
   localStorage.removeItem("token");
 };
 
+// Store the token in local storage
+export const storeAuthenticatedUserToken = (token: string): void => {
+  localStorage.setItem("token", token);
+};
+
 // Function to check if the token is expired
 export const isTokenExpired = (token: string): boolean => {
   try {
