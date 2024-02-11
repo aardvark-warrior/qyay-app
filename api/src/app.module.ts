@@ -13,7 +13,7 @@ import { EventModule } from "./event/event.module";
 import { AuthService } from "./auth/auth.service";
 import { PassportModule } from "@nestjs/passport";
 import { LocalStrategy } from "./auth/local.strategy";
-import { QuestionModule } from './question/question.module';
+import { QuestionModule } from "./question/question.module";
 
 @Module({
   imports: [

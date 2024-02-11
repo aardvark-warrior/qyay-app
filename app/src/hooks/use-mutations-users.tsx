@@ -42,7 +42,7 @@ function useMutationUser() {
   const registerUser = async (
     username: string,
     password: string,
-    displayName: string
+    displayName: string,
   ) => {
     try {
       await register(username, password, displayName);

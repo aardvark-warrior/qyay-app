@@ -19,7 +19,6 @@ const handleError = (response: Response, message?: string) => {
   );
 };
 
-
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   console.log(API_URL);
@@ -137,7 +136,7 @@ export const logout = async (): Promise<void> => {
 export const register = async (
   username: string,
   password: string,
-  displayName: string
+  displayName: string,
 ): Promise<void> => {
   const response = await fetch(`${API_URL}/users/register`, {
     method: "POST",
