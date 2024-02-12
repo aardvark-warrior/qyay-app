@@ -4,21 +4,19 @@ import Event from "@/components/event/event";
 import Sidebar from "@/components/sidebar";
 import useQueryEvents from "@/hooks/use-query-events";
 import { useStore } from "@/lib/store";
-import { EventWithUserData } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const EventView = () => {
-  const { events } = useQueryEvents();
-  const [event, setEvent] = useState<EventWithUserData | null>(null);
-  const setSelectedEventId = useStore((state) => state.setSelectedEventId);
+  const { eventId } = useParams();
+  const { event, loadEvent } = useQueryEvents();
   const selectedEventId = useStore((state) => state.selectedEventId);
 
   useEffect(() => {
-    if (events && events.length !== 0) {
-      setEvent(events[0]);
-      setSelectedEventId(events[0].id);
+    if (eventId) {
+      loadEvent(eventId);
     }
-  }, [events]);
+  }, [eventId]);
 
   return (
     <>

@@ -73,12 +73,19 @@ export class EventController {
   }
 
   @Get(":id")
-  async findOne(@Param("id") id: string): Promise<EventResponseDTO> {
-    const event = await this.eventService.findOne(id);
+  async findOne(
+    @Param("id") id: string,
+    @Query("withUserData") withUserData?: boolean,
+  ): Promise<EventResponseDTO> {
+    const event = await this.eventService.findOne(id, withUserData);
     if (!event) {
       throw new NotFoundException(`Event with ID ${id} not found`);
     }
+    
     delete event.userId;
+    if (withUserData) {
+      delete event.user.password;
+    }
     return event;
   }
 

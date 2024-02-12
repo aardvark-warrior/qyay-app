@@ -31,6 +31,19 @@ export const fetchEvents = async (): Promise<EventWithUserData[]> => {
   return responseJson.data;
 };
 
+// Fetch a event given its id
+export const fetchEventById = async (id: string): Promise<EventWithUserData> => {
+  const response = await fetch(`${API_URL}/events/${id}?withUserData=true`);
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
+
 // Create an event
 export const createEvent = async (
   name: string,

@@ -22,8 +22,17 @@ export class EventService {
   }
 
   // Read
-  async findOne(id: string): Promise<Event | null> {
-    return this.eventRepository.findOneBy({ id });
+  async findOne(id: string, withUserData?: boolean): Promise<Event | null> {
+    const relations = [];
+
+    if (withUserData) {
+      relations.push("user");
+    }
+    
+    return this.eventRepository.findOne({ 
+      where: { id },
+      relations, 
+    });
   }
 
   async findAll(
