@@ -89,7 +89,7 @@ export class EventController {
     return event;
   }
 
-  @UseGuards(JwtAuthGuard, EventOwnershipGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Body() createEventDto: CreateEventDTO,
