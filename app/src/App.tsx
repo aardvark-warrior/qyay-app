@@ -1,3 +1,4 @@
+import Aside from "./components/aside";
 import Sidebar from "./components/sidebar";
 import Feed from "./components/feed";
 import { Toaster } from "./components/ui/toaster";
@@ -42,6 +43,7 @@ function App() {
         {user ? <LogoutDialog /> : <LoginDialog />}
         {!user && <RegisterDialog />}
       </div>
+      <Aside />
       <Toaster />
     </div>
   );
