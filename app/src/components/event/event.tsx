@@ -1,5 +1,7 @@
 import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
+import { Button } from "../ui/button";
+import { EventViewQuestions } from "./event-view-questions";
 
 const Event = ({ event }: { event: EventWithUserData }) => {
   const { id, name, description, startTime, user } = event;
@@ -8,12 +10,12 @@ const Event = ({ event }: { event: EventWithUserData }) => {
       <EventHeader
         eventId={id}
         eventName={name}
-        // creator={userId}
         startTime={startTime}
         displayName={user?.displayName}
         username={user?.username}
       />
       <div className="font-thin">{description}</div>
+      <EventViewQuestions eventId={id}/>
     </div>
   );
 };

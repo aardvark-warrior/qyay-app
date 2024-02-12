@@ -4,14 +4,12 @@ import EventActions from "./event-actions";
 const EventHeader = ({
   eventId,
   eventName,
-  // creator,
   startTime,
   displayName,
   username,
 }: {
   eventId: string;
   eventName: string;
-  // creator: number;
   startTime: string;
   displayName?: string;
   username?: string;
