@@ -26,12 +26,10 @@ To get started with this project, follow these steps:
 
 2. **Creating Events (Host)**: After logging in, you can use the plus icon on the left sidebar to create a new event - simply provide the name of your Event. 
 
-3. **Deleting Events (Host)**: Note: all events hosted on the app (including those created by other users) will show up in the feed. However, you will only be able to edit/delete the events that you have created (authorization provided by logging in).
+3. **Deleting Events (Host)**: Note: all events hosted on the app (including those created by other users) will show up in the feed. However, you will only be able to edit/delete the events that you have created (authorization provided by logging in). If you are authorized to modify an event, a `Modify Event` button will appear next to the `Join Event` button on those events.
 
 4. **Joining an Event**: One way to ask questions for an event is by joining the event itself. Starting in the Home Page (`http://localhost:5173`), you can click the `Join Event` button in the top right corner of the event you are interested in. This will take you to a new page with a unique link for that event. There, you can ask questions anonymously clicking the green `Ask a Question` button. A dialog will pop-up, prompting you to enter in your question.
 
-5. **Leaving Question 2**: There is another way you can leave questions for an event. From the Home Page, you can click `View Questions` in the bottom of the event you are interested in, and then click `Ask a Question`. A dialog will pop-up, prompting you for your question.
+5. **Event Actions**: Whether you are the creator or an attendee of an event, the action buttons in en event box will disappear when you opt to `Join Event`. They will re-appear once you return to the home page.
 
-6. **Event Actions**: Whether you are the creator or an attendee of an event, the action buttons in en event box will disappear when you opt to `Join Event`. They will re-appear once you return to the home page.
-
-7. **Navigating home**: There are several ways you can navigate home. One way is to click the `Home` button in the top left corner of the app. Another way is by typing in the Base URL of the app `http://localhost:5173/`.
+6. **Navigating home**: There are several ways you can navigate home. One way is to click the `Home` button in the top left corner of the app. Another way is by typing in the Base URL of the app `http://localhost:5173/`.
