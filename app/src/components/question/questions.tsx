@@ -7,12 +7,12 @@ const Questions = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center border-b border-slate-200">
         <AddQuestionDialog />
       </div>
-      <div>
+      <div className="border-b-2 border-slate-400">
         {questions.length === 0 ? (
-          <div className="p-4 text-center border-b border-slate-400 bg-slate-50">
+          <div className="p-4 text-center border-b border-slate-200 font-serif">
             No questions yet...
           </div>
         ): (
