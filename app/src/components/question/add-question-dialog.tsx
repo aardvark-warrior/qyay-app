@@ -43,17 +43,16 @@ export const AddQuestionDialog = () => {
         <Button
           aria-label={"Ask a Question"}
           variant="secondary"
-          size="sm"
-          className="w-full m-2 bg-green-200"
+          className="w-full my-2 mx-4 bg-green-200 hover:bg-green-400"
         >
-          Ask Question
+          Ask a Question
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Ask Question</DialogTitle>
           <DialogDescription>
-            "Provide the content of your question here."
+            Provide type in your question here.
           </DialogDescription>
         </DialogHeader>
           <div className="grid gap-4 py-4">

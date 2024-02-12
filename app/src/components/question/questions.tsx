@@ -12,7 +12,7 @@ const Questions = () => {
       </div>
       <div className="border-b-2 border-slate-400">
         {questions.length === 0 ? (
-          <div className="p-4 text-center border-b border-slate-200 font-serif">
+          <div className="p-4 text-center border-b border-slate-200 font-serif text-sm text-slate-400">
             No questions yet...
           </div>
         ): (
