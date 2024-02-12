@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   return (
-    <div className="flex justify-center min-h-screen gap-3">
+    <div>
       <RouterProvider router={router} />
       <Toaster />
     </div>

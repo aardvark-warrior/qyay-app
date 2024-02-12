@@ -56,7 +56,7 @@ const EventActions = ({
 
       <Button 
         size="sm" 
-        className="m-1 opacity-90 bg-sky-800 font-bold"
+        className="m-1 opacity-90 bg-blue-800 font-bold"
       >
         <Link to={`events/${eventId}`}>
           Join Event

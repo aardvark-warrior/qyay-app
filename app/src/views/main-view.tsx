@@ -1,5 +1,6 @@
 import Aside from "@/components/aside";
 import Feed from "@/components/feed";
+import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
 import { useStore } from "@/lib/store";
 import { useEffect } from "react";
@@ -13,9 +14,14 @@ const MainView = () => {
   
   return (
     <>
-      <Sidebar />
-      <Feed />
-      <Aside />
+      <div>
+        <Header />
+        <div className="flex justify-between min-h-screen gap-3">
+          <Sidebar />
+          <Feed />
+          <Aside />
+        </div>
+      </div>
     </>
   );
 };
