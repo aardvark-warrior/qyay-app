@@ -1,6 +1,3 @@
-// import Sidebar from "./components/sidebar";
-// import Feed from "./components/feed";
-// import Aside from "./components/aside";
 import MainView from "./views/main-view";
 import { Toaster } from "./components/ui/toaster";
 import { useStore } from "./lib/store";
@@ -11,10 +8,19 @@ import {
   isTokenExpired,
   removeAuthenticatedUserToken,
 } from "./lib/auth";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 
 function App() {
   const clearUser = useStore((state) => state.clearUser);
   const { toast } = useToast();
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainView />,
+    },
+  ]);  
 
   useEffect(() => {
     const token = getAuthenticatedUserToken();
@@ -34,10 +40,7 @@ function App() {
 
   return (
     <div className="flex justify-center min-h-screen gap-3">
-      {/* <Sidebar />
-      <Feed />
-      <Aside /> */}
-      <MainView />
+      <RouterProvider router={router} />
       <Toaster />
     </div>
   );
