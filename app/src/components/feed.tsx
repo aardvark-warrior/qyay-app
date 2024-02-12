@@ -1,4 +1,4 @@
-import Events from "./events";
+import Events from "./event/events";
 import Header from "./header";
 
 const Feed = () => {

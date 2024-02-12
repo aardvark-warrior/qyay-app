@@ -1,5 +1,5 @@
 import { useStore } from "@/lib/store";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import useMutationsEvents from "@/hooks/use-mutations-events";
 import { useEffect, useState } from "react";
 

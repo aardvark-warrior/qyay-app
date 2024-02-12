@@ -14,7 +14,7 @@ import {
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import useMutationEvents from "@/hooks/use-mutations-events";
 import { useToast } from "@/components/ui/use-toast";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "../ui/textarea";
 import { useStore } from "@/lib/store";
 
 export const AddEventDialog = () => {

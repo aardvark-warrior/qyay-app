@@ -1,6 +1,6 @@
 import { HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
-import { AddEventDialog } from "./add-event-dialog";
+import { AddEventDialog } from "./event/add-event-dialog";
 
 const Sidebar = () => {
   return (
