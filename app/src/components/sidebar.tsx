@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { AddEventDialog } from "./event/add-event-dialog";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({isEventView=false}: {isEventView?: boolean}) => {
   const navigate = useNavigate();
   const handleClickHome = () => {
     navigate("/");
@@ -13,13 +13,13 @@ const Sidebar = () => {
     <div className="flex flex-col gap-2 p-4">
       <Button 
         aria-label={"Home"} 
-        variant="ghost" 
-        size="sm"
+        variant="outline" 
         onClick={handleClickHome}
       >
-        <HomeIcon className="w-5 h-5" />
+        {/* <HomeIcon className="w-5 h-5" /> */}
+        Home
       </Button>
-      <AddEventDialog />
+      {!isEventView && <AddEventDialog />}
     </div>
   );
 };

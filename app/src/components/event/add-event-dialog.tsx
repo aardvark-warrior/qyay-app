@@ -43,8 +43,9 @@ export const AddEventDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button aria-label={"Create an Event"} variant="default" size="sm">
-          <PlusCircledIcon className="w-5 h-5" />
+        <Button aria-label={"Create an Event"} variant="default" className="bg-blue-800">
+          {/* <PlusCircledIcon className="w-5 h-5" /> */}
+          New Event
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
