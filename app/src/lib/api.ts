@@ -168,7 +168,7 @@ export const createQuestion = async (
   eventId: string,
   content: string,
 ): Promise<Question> => {
-  const response = await fetch(`${API_URL}/posts/${eventId}/questions`, {
+  const response = await fetch(`${API_URL}/events/${eventId}/questions`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

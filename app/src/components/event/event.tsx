@@ -1,6 +1,5 @@
 import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
-import { Button } from "../ui/button";
 import { EventViewQuestions } from "./event-view-questions";
 
 const Event = ({ event }: { event: EventWithUserData }) => {

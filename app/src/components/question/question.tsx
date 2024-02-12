@@ -5,10 +5,10 @@ const Question = ({ question }: { question: Question }) => {
   const { content, timestamp } = question;
 
   return (
-    <div className="flex border-b border-slate-400 bg-indigo-50">
+    <div className="flex border-b border-slate-400 bg-slate-50">
       <div className="flex justify-between w-full p-4 ">
         <div className="font-serif">{content}</div>
-        <div className="opacity-30">{formatTimestamp(timestamp)}</div>
+        <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
     </div>
   );
