@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import useMutationUser from "@/hooks/use-mutation-users";
+import useMutationUser from "@/hooks/use-mutations-users";
 
 export const LogoutDialog = () => {
   const { logoutUser } = useMutationUser();

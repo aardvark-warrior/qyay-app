@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import useMutationUser from "@/hooks/use-mutation-users";
+import useMutationUser from "@/hooks/use-mutations-users";
 
 export const LoginDialog = () => {
   const [username, setUsername] = useState("");

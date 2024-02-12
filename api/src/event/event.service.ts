@@ -1,37 +1,84 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Event } from './event.entity';
-import { Repository } from 'typeorm';
-import { CreateEventDTO } from './create-event.dto';
-import { UpdateEventDTO } from './update-event.dto';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Event } from "./event.entity";
+import { CreateEventDTO } from "./create-event.dto";
+import { UpdateEventDTO } from "./update-event.dto";
 
 @Injectable()
 export class EventService {
   constructor(
     @InjectRepository(Event)
-    private eventRepository: Repository<Event>
+    private eventRepository: Repository<Event>,
   ) {}
 
   // Create
-  async createEvent(eventDto: CreateEventDTO, userId: number): Promise<Event> {
+  async create(createEventDto: CreateEventDTO, userId: number): Promise<Event> {
     const event = await this.eventRepository.create({
-      ...eventDto,
-      userId
+      ...createEventDto,
+      userId,
     });
     return this.eventRepository.save(event);
   }
 
   // Read
-  async findAll(): Promise<Event[]> {
-    return this.eventRepository.find();
+  async findOne(id: string, withUserData?: boolean): Promise<Event | null> {
+    const relations = [];
+
+    if (withUserData) {
+      relations.push("user");
+    }
+    
+    return this.eventRepository.findOne({ 
+      where: { id },
+      relations, 
+    });
   }
 
-  async findOne(id: string): Promise<Event | null> {
-    return this.eventRepository.findOneBy({ id });
+  async findAll(
+    limit: number,
+    offset: number,
+    search?: string,
+    userId?: number,
+    withUserData?: boolean,
+  ): Promise<Event[]> {
+    const queryBuilder = this.eventRepository.createQueryBuilder("events");
+
+    if (withUserData) {
+      queryBuilder.leftJoinAndSelect("events.user", "user");
+    }
+
+    let hasWhereCondition = false;
+
+    if (search !== undefined) {
+      queryBuilder.where("events.name ILIKE :search", {
+        search: `%${search}%`,
+      });
+      hasWhereCondition = true;
+    }
+
+    if (userId !== undefined) {
+      if (hasWhereCondition) {
+        queryBuilder.andWhere("events.userId = :userId", { userId });
+      } else {
+        queryBuilder.where("events.userId = :userId", { userId });
+        hasWhereCondition = true;
+      }
+    }
+
+    queryBuilder.limit(limit);
+    queryBuilder.offset(offset);
+
+    queryBuilder.orderBy("events.startTime", "ASC");
+
+    return queryBuilder.getMany();
   }
 
   // Update
-  async update(id: string, updateEventDto: UpdateEventDTO): Promise<Event | null> {
+  async update(
+    id: string,
+    updateEventDto: UpdateEventDTO,
+  ): Promise<Event | null> {
     const event = await this.eventRepository.preload({ id, ...updateEventDto });
     if (!event) {
       return null;

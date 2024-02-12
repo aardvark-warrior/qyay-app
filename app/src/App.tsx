@@ -1,21 +1,55 @@
-import Sidebar from "./components/sidebar";
-import Feed from "./components/feed";
+import MainView from "./views/main-view";
 import { Toaster } from "./components/ui/toaster";
 import { useStore } from "./lib/store";
-import { LoginDialog } from "./components/login-dialog";
-import { LogoutDialog } from "./components/logout-dialog";
+import { useToast } from "./components/ui/use-toast";
+import { useEffect } from "react";
+import {
+  getAuthenticatedUserToken,
+  isTokenExpired,
+  removeAuthenticatedUserToken,
+} from "./lib/auth";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./views/error-page";
+import EventView from "./views/event-view";
 
 
 function App() {
-  const user = useStore((state) => state.user);
+  const clearUser = useStore((state) => state.clearUser);
+  const { toast } = useToast();
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainView />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path:"/events/:eventId",
+      element: <EventView />,
+      errorElement: <ErrorPage />,
+      
+    },
+  ]);  
+
+  useEffect(() => {
+    const token = getAuthenticatedUserToken();
+    if (token) {
+      const isExpired = isTokenExpired(token);
+      if (isExpired) {
+        removeAuthenticatedUserToken();
+        clearUser();
+        toast({
+          variant: "destructive",
+          title: "Session Expired",
+          description: "Your session has expired. Please login again.",
+        });
+      }
+    }
+  }, []);
 
   return (
     <div className="flex justify-center min-h-screen gap-3">
-      <Sidebar />
-      <Feed />
-      <div className="flex flex-col gap-2 p-4">
-        {user ? <LogoutDialog /> : <LoginDialog />}
-      </div>
+      <RouterProvider router={router} />
       <Toaster />
     </div>
   );

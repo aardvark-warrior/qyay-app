@@ -1,5 +1,5 @@
 import { User } from "./types";
-import { jwtDecode } from "jwt-decode"
+import { jwtDecode } from "jwt-decode";
 
 // Get the user by decoding the token from local storage
 export const getAuthenticatedUser = (): User => {
@@ -10,17 +10,22 @@ export const getAuthenticatedUser = (): User => {
 
 // Get the token from local storage
 export const getAuthenticatedUserToken = (): string | null => {
-  return localStorage.getItem('token');
+  return localStorage.getItem("token");
 };
 
 // Add the token to local storage
-export const setAuthenticatedUserToken = (token: string) =>  {
-  localStorage.setItem('token', token);
-}
+export const setAuthenticatedUserToken = (token: string) => {
+  localStorage.setItem("token", token);
+};
 
 // Remove the token from local storage
 export const removeAuthenticatedUserToken = (): void => {
   localStorage.removeItem("token");
+};
+
+// Store the token in local storage
+export const storeAuthenticatedUserToken = (token: string): void => {
+  localStorage.setItem("token", token);
 };
 
 // Function to check if the token is expired
@@ -34,10 +39,3 @@ export const isTokenExpired = (token: string): boolean => {
     return true;
   }
 };
-
-// Store the token in local storage
-export const storeAuthenticatedUserToken = (token: string): void => {
-  localStorage.setItem("token", token);
-};
-
-

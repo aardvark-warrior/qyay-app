@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from "class-validator";
 
 export class UpdateEventDTO {
   @IsOptional()
@@ -8,4 +8,8 @@ export class UpdateEventDTO {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsString()
+  startTime?: string;
 }

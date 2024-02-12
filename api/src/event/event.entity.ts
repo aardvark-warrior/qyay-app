@@ -1,27 +1,45 @@
 import { User } from "src/user/user.entity";
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Question } from "src/question/question.entity";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity()
 export class Event {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
-  
-  @Column()
-  description: string;
-  
-  // @CreateDateColumn({
-  //   type: 'timestamptz',
-  //   default: () => 'CURRENT_TIMESTAMP',
-  // })
-  // startTime: Date;
 
-  @ManyToOne(() => User, (user) => {user.events})
-  @JoinColumn({ name: 'userId' })
+  @Column({ nullable: true })
+  description: string;
+
+  @CreateDateColumn({
+    nullable: true,
+    type: "timestamptz",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  startTime: Date;
+
+  @ManyToOne(
+    () => User,
+    (user) => {
+      user.events;
+    },
+  )
+  @JoinColumn({ name: "userId" })
   user: User;
 
   @Column()
   userId: number;
+
+  @OneToMany(() => Question, (question) => question.event)
+  questions: Question[];
 }

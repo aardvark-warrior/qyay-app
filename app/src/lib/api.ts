@@ -1,106 +1,109 @@
-import { nanoid } from "nanoid";
-import type { User, Event, EventWithUserData } from "@/lib/types";
-import { getAuthenticatedUser, getAuthenticatedUserToken, removeAuthenticatedUserToken, storeAuthenticatedUserToken } from "./auth";
+import type { User, Event, EventWithUserData, Question } from "@/lib/types";
+import {
+  getAuthenticatedUser,
+  getAuthenticatedUserToken,
+  removeAuthenticatedUserToken,
+  storeAuthenticatedUserToken,
+} from "./auth";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+const handleError = (response: Response, message?: string) => {
+  if (response.status === 401) {
+    removeAuthenticatedUserToken();
+    throw new Error("Your session has expired. Please login again.");
+  }
+
+  throw new Error(
+    `Error: ${response.status} - ${message || response.statusText}`,
+  );
+};
+
 // Fetch all events with user data
 export const fetchEvents = async (): Promise<EventWithUserData[]> => {
-  const token = getAuthenticatedUserToken();
-  const response = await fetch(`${API_URL}/decks?withUserData=true`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+  const response = await fetch(`${API_URL}/events?withUserData=true`);
   const responseJson = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      `Error: ${response.status} - ${
-        responseJson.message || response.statusText
-      }`,
-    );
+    handleError(response, responseJson.message);
   }
 
   return responseJson.data;
-
-  // return new Promise((resolve) => {
-  //   setTimeout(async () => {
-  //     const data: EventWithUserData[] = [];
-  //     for (const event of db.events) {
-  //       const user = await findUser(event.userId);
-  //       data.push({ ...event, user });
-  //     }
-  //     resolve(data);
-  //   }, 200); // Simulate an API delay
-  // });
 };
+
+// Fetch a event given its id
+export const fetchEventById = async (id: string): Promise<EventWithUserData> => {
+  const response = await fetch(`${API_URL}/events/${id}?withUserData=true`);
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
 
 // Create an event
 export const createEvent = async (
-  name: string, 
-  description?: string
+  name: string,
+  description?: string,
+  startTime?: string,
 ): Promise<Event> => {
   const user = getAuthenticatedUser();
   const token = getAuthenticatedUserToken();
 
-  const response = await fetch(`${API_URL}/decks`, {
+  const response = await fetch(`${API_URL}/events`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ name, description }),
+    body: JSON.stringify({ name, description, startTime }),
   });
-
   const responseJson = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      `Error: ${response.status} - ${
-        responseJson.message || response.statusText
-      }`,
-    );
+    handleError(response, responseJson.message);
+    // throw new Error(
+    //   `Error: ${response.status} - ${
+    //     responseJson.message || response.statusText
+    //   }`,
+    // );
   }
 
   return {
     ...responseJson.data,
     user: user,
   };
-
-  // return new Promise((resolve) => {
-  //   setTimeout(() => {
-  //     const user = getAuthenticatedUser();
-  //     const newEvent: Event = { 
-  //       id: nanoid(), 
-  //       userId: user.id,
-  //       name, 
-  //       description
-  //     };
-  //     db.events.push(newEvent);
-  //     resolve(newEvent);
-  //   }, 200); // Simulate an API delay
-  // });
 };
 
-// // Delete event by id
-// export const deleteEvent = async (id: string): Promise<void> => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       db.events = db.events.filter((event) => event.id !== id);
-//       resolve();
-//     }, 200); // Simulate an API delay
-//   });
-// };
+// Delete event by id
+export const deleteEvent = async (id: string): Promise<void> => {
+  const token = getAuthenticatedUserToken();
 
-// Login, store the token, and return the user
+  const response = await fetch(`${API_URL}/events/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+    // throw new Error(
+    //   `Error: ${response.status} - ${
+    //     responseJson.message || response.statusText
+    //   }`,
+    // );
+  }
+};
+
 export const login = async (
   username: string,
   password: string,
 ): Promise<User> => {
-  const API_URL = import.meta.env.VITE_API_URL;
   const response = await fetch(`${API_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -136,4 +139,62 @@ export const logout = async (): Promise<void> => {
   // Here we just clear the token
   removeAuthenticatedUserToken();
 };
+
+// Register a new user
+export const register = async (
+  username: string,
+  password: string,
+  displayName: string,
+): Promise<void> => {
+  const response = await fetch(`${API_URL}/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password, displayName }),
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      `Error: ${response.status} - ${
+        responseJson.message || response.statusText
+      }`,
+    );
+  }
+};
+
+// Fetch all questions for an event
+export const fetchQuestions = async (eventId: string): Promise<Question[]> => {
+  const response = await fetch(`${API_URL}/events/${eventId}/questions`);
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
+// Create a new question
+export const createQuestion = async (
+  eventId: string,
+  content: string,
+): Promise<Question> => {
+  const response = await fetch(`${API_URL}/events/${eventId}/questions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ content }),
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
 
