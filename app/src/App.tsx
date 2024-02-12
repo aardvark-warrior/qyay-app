@@ -9,6 +9,7 @@ import {
   removeAuthenticatedUserToken,
 } from "./lib/auth";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ErrorPage from "./views/error-page";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     {
       path: "/",
       element: <MainView />,
+      errorElement: <ErrorPage />,
     },
   ]);  
 
