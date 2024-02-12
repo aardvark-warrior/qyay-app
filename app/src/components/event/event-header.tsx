@@ -7,12 +7,14 @@ const EventHeader = ({
   startTime,
   displayName,
   username,
+  isEventView = false,
 }: {
   eventId: string;
   eventName: string;
   startTime: string;
   displayName?: string;
   username?: string;
+  isEventView: boolean,
 }) => {
   return (
     <div className="flex justify-between">
@@ -23,7 +25,9 @@ const EventHeader = ({
         </p>
         <p className="text-sm opacity-30">{formatTimestamp(startTime)}</p>
       </div>
-      <EventActions eventId={eventId} username={username} />
+      {!isEventView && 
+        <EventActions eventId={eventId} username={username}/>
+      }
     </div>
   );
 };
