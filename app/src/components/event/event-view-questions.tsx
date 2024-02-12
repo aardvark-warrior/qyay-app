@@ -24,7 +24,7 @@ export const EventViewQuestions = ({
     <div className="flex justify-center pt-2">
       <Button 
         variant="ghost"
-        className="w-full p-8 bg-sky-100"
+        className="w-full p-6 bg-slate-50"
         onClick={showQuestions}
       >
         View Questions
