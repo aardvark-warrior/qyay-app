@@ -6,7 +6,7 @@ const Questions = () => {
 
   if (questions.length === 0) {
     return (
-      <div className="p-4 text-center border-b border-slate-400 bg-cyan-50">
+      <div className="p-4 text-center border-b border-slate-400 bg-indigo-50">
         No questions yet...
       </div>
     );
