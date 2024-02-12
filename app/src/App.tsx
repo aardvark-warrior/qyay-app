@@ -1,6 +1,7 @@
-import Aside from "./components/aside";
 import Sidebar from "./components/sidebar";
 import Feed from "./components/feed";
+import Aside from "./components/aside";
+import MainView from "./views/main-view";
 import { Toaster } from "./components/ui/toaster";
 import { LoginDialog } from "./components/auth/login-dialog";
 import { LogoutDialog } from "./components/auth/logout-dialog";
@@ -44,6 +45,7 @@ function App() {
         {!user && <RegisterDialog />}
       </div>
       <Aside />
+      <MainView />
       <Toaster />
     </div>
   );
