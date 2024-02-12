@@ -45,8 +45,7 @@ const EventActions = ({
       {isOwner && (
         <div>
           <Button
-            className="m-1 "
-            // variant="ghost"
+            className="m-1"
             size="sm"
             onClick={() => deleteEventById(eventId)}
           >

@@ -10,6 +10,7 @@ import {
 } from "./lib/auth";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./views/error-page";
+import EventView from "./views/event-view";
 
 
 function App() {
@@ -21,6 +22,12 @@ function App() {
       path: "/",
       element: <MainView />,
       errorElement: <ErrorPage />,
+    },
+    {
+      path:"/events/:eventId",
+      element: <EventView />,
+      errorElement: <ErrorPage />,
+      
     },
   ]);  
 
