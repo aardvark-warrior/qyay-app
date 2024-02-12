@@ -1,10 +1,11 @@
 import Sidebar from "./components/sidebar";
 import Feed from "./components/feed";
 import { Toaster } from "./components/ui/toaster";
-import { LoginDialog } from "./components/auth/login-dialog";
-import { LogoutDialog } from "./components/auth/logout-dialog";
+import Aside from "./components/aside";
+// import { LoginDialog } from "./components/auth/login-dialog";
+// import { LogoutDialog } from "./components/auth/logout-dialog";
+// import { RegisterDialog } from "./components/auth/register-dialog";
 import { useStore } from "./lib/store";
-import { RegisterDialog } from "./components/auth/register-dialog";
 import { useToast } from "./components/ui/use-toast";
 import { useEffect } from "react";
 import {
@@ -14,7 +15,7 @@ import {
 } from "./lib/auth";
 
 function App() {
-  const user = useStore((state) => state.user);
+  // const user = useStore((state) => state.user);
   const clearUser = useStore((state) => state.clearUser);
   const { toast } = useToast();
 
@@ -38,10 +39,11 @@ function App() {
     <div className="flex justify-center min-h-screen gap-3">
       <Sidebar />
       <Feed />
-      <div className="flex flex-col gap-2 p-4">
+      <Aside />
+      {/* <div className="flex flex-col gap-2 p-4">
         {user ? <LogoutDialog /> : <LoginDialog />}
         {!user && <RegisterDialog />}
-      </div>
+      </div> */}
       <Toaster />
     </div>
   );
