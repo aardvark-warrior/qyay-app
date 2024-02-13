@@ -11,15 +11,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
 import useMutationEvents from "@/hooks/use-mutations-events";
 import { useToast } from "@/components/ui/use-toast";
-import { Textarea } from "../ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/lib/store";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export const AddEventDialog = () => {
   const { toast } = useToast();
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const { addNewEvent } = useMutationEvents();
   const user = useStore((state) => state.user);
 
@@ -32,40 +34,55 @@ export const AddEventDialog = () => {
       });
       return;
     }
-    await addNewEvent(name);
+    await addNewEvent(name, description);
     setName("");
+    setDescription("");
   };
 
   const handleCancel = () => {
     setName("");
+    setDescription("");
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button aria-label={"Create an Event"} variant="default" className="bg-blue-800">
-          {/* <PlusCircledIcon className="w-5 h-5" /> */}
           New Event
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Add Event</DialogTitle>
+          <DialogTitle>Create Event</DialogTitle>
           <DialogDescription>
             {user
-              ? "Provide the name of your event here."
+              ? "Provide your event information here."
               : "Please login to create an event."}
           </DialogDescription>
         </DialogHeader>
         {user && (
           <div className="grid gap-4 py-4">
             <div className="grid items-center grid-cols-4 gap-4">
-              <Textarea
+              <Label htmlFor="Event Name" className="text-right">
+                Event Name
+              </Label>
+              <Input
                 id="name"
                 value={name}
-                className="col-span-4"
+                className="col-span-3"
                 onChange={(e) => {
                   setName(e.target.value);
+                }}
+              />
+              <Label htmlFor="Event Description" className="text-right">
+                Description
+              </Label>
+              <Textarea
+                id="description"
+                value={description}
+                className="flex h-full col-span-3"
+                onChange={(e) => {
+                  setDescription(e.target.value);
                 }}
               />
             </div>

@@ -33,11 +33,11 @@ const EventHeader = ({
     <>
       <div className="flex justify-between">
         <div>
-          <p className="text-lg font-bold">Event: {eventName}</p>
-          <p className="text-muted-foreground">
+          <p className="text-xl font-extrabold">{eventName}</p>
+          <p className="text-sm opacity-30">{formatTimestamp(startTime)}</p>
+          <p className="text-sm text-orange-800 opacity-80">
             Host: {displayName || "Unknown"}
           </p>
-          <p className="text-sm opacity-30">{formatTimestamp(startTime)}</p>
         </div>
         
         {!isEventView && 

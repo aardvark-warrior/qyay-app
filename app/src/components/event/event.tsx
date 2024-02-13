@@ -22,7 +22,11 @@ const Event = ({
         username={user?.username}
         isEventView={isEventView}
       />
-      <div className="font-thin">{description}</div>
+      {description && 
+        <div className="pt-2 text-slate-700 text-sm">
+          <p className="font-bold">Description:</p> {description}
+        </div>
+      }
       {/* {!isEventView &&
         <EventViewQuestions eventId={id}/>
       } */}
