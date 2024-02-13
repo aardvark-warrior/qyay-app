@@ -35,7 +35,7 @@ const EventHeader = ({
         <div>
           <p className="text-xl font-extrabold">{eventName}</p>
           <p className="text-sm opacity-30">{formatTimestamp(startTime)}</p>
-          <p className="text-sm text-orange-800 opacity-80">
+          <p className="text-sm text-indigo-900 opacity-80">
             Host: {displayName || "Unknown"}
           </p>
         </div>
