@@ -19,7 +19,9 @@ export class Question {
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
   timestamp: Date;
 
-  @ManyToOne(() => Event, (event) => event.questions)
+  @ManyToOne(() => Event, (event) => event.questions, {
+    onDelete: 'CASCADE'
+  })
   @JoinColumn({ name: "eventId" })
   event: Event;
 
