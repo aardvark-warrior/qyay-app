@@ -28,6 +28,9 @@ export class Event {
   })
   startTime: Date;
 
+  @Column({ default: 0 })
+  questionCount: number;
+
   @ManyToOne(
     () => User,
     (user) => {

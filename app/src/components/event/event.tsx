@@ -10,9 +10,11 @@ const Event = ({
   isEventView?: boolean;
 }) => {
   const { id, name, description, startTime, user } = event;
+  
   return (
     <div className="p-4 border-b-2 border-slate-400">
       <EventHeader
+        event={event}
         eventId={id}
         eventName={name}
         startTime={startTime}

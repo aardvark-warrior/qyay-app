@@ -3,12 +3,14 @@ import { ILike, Repository } from "typeorm";
 import { Question } from "./question.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateQuestionDTO } from "./create-question.dto";
+import { EventService } from "src/event/event.service";
 
 @Injectable()
 export class QuestionService {
   constructor(
     @InjectRepository(Question)
     private readonly questionRepository: Repository<Question>,
+    private readonly eventService: EventService,
   ) {}
 
   // Returns all questions that match the given criteria.
@@ -54,6 +56,9 @@ export class QuestionService {
       ...createQuestionDto,
       eventId, // Associate the question with an event
     });
+
+    // Increment the question counter in the associated event
+    await this.eventService.incrementQuestionCounter(eventId);
 
     return this.questionRepository.save(question);
   }

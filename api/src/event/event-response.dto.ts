@@ -5,5 +5,6 @@ export class EventResponseDTO {
   name: string;
   description?: string;
   startTime?: Date;
+  questionCount: number;
   user?: UserResponseDTO;
 }

@@ -94,4 +94,15 @@ export class EventService {
     }
     return this.eventRepository.remove(event);
   }
+
+  async incrementQuestionCounter(id: string): Promise<Event | null> {
+    const event = await this.findOne(id);
+    if (!event) {
+      return null;
+    }
+  
+    event.questionCount += 1;
+    await this.eventRepository.save(event);
+    return event;
+  }
 }

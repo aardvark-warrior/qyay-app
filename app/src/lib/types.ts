@@ -1,6 +1,7 @@
 export type Event = {
   id: string;
   userId: number;
+  questionCount: number;
   // User-entered fields
   name: string;
   description?: string;
