@@ -28,37 +28,23 @@ const EventActions = ({
 
   return (
     <div className="flex justify-between">
-      {isOwner && <HostActions eventId={eventId}/>}
-
-      <Button className="m-1 opacity-90 bg-blue-800 font-bold" size="sm" >
-        <Link to={`events/${eventId}`}>
-          Join Event
-        </Link>
-      </Button>
-
-      {/* {isOwner && (
-        <div>
-          <Button
-            className="m-1 bg-slate-200"
-            variant="ghost"
-            size="sm"
-            //TODO: add editEvent dialog
-          >
-            <Pencil2Icon className="h-5 w-5"/>
-          </Button>
-        </div>
-      )}
-      {isOwner && (
-        <div>
-          <Button
-            className="m-1"
-            size="sm"
-            onClick={() => deleteEventById(eventId)}
-          >
-            <TrashIcon className="h-5 w-5"/>
-          </Button>
-        </div>
-      )} */}
+      {isOwner && 
+        <HostActions eventId={eventId}/>
+      }
+      {isOwner &&
+        <Button className="m-1 opacity-90 bg-indigo-800 font-bold" size="sm" >
+          <Link to={`events/${eventId}`}>
+            Moderate Event
+          </Link>
+        </Button>
+      }
+      {!isOwner &&
+        <Button className="m-1 opacity-90 bg-blue-800 font-bold" size="sm" >
+          <Link to={`events/${eventId}`}>
+            Join Event
+          </Link>
+        </Button>
+      }
     </div>
   );
 };

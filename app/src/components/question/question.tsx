@@ -14,11 +14,11 @@ const Question = ({ question }: { question: Question }) => {
         <div className="font-serif">{content}</div>
         <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
-      <div className="flex w-full justify-end pt-2">
+      <div className="flex justify-end pt-2">
         <Button 
           size="sm" 
           variant="ghost" 
-          className="hover:bg-slate-300"
+          className="bg-slate-100 hover:bg-slate-300"
           onClick={() => setUpvotes(upvotes + 1)}
         >
           <DoubleArrowUpIcon className="mr-1 mb-1"/> Upvote 

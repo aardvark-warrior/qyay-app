@@ -1,4 +1,3 @@
-import { DotsHorizontalIcon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import useMutationsEvents from "@/hooks/use-mutations-events";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -13,10 +12,10 @@ const HostActions = ({eventId}: {eventId: string}) => {
           <Button
             variant="ghost"
             size="sm"
-            className="flex bg-blue-50 data-[state=open]:bg-muted"
+            className="flex bg-blue-200 hover:bg-blue-100 data-[state=open]:bg-muted"
           >
             {/* <DotsHorizontalIcon className="w-4 h-4" /> */}
-            Modify Event
+            Change Event
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>

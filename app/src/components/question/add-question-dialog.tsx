@@ -43,7 +43,7 @@ export const AddQuestionDialog = () => {
         <Button
           aria-label={"Ask a Question"}
           variant="secondary"
-          className="w-full my-2 mx-4 bg-violet-300 hover:bg-violet-400"
+          className="w-full my-2 mx-4 bg-green-50 hover:bg-green-200"
         >
           Ask a Question
         </Button>
