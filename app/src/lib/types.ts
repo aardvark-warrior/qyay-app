@@ -11,7 +11,7 @@ export type Question = {
   id: string;
   content: string;
   timestamp: string;
-  upvotes: number;
+  upvoteCount: number;
 }
 
 export type User = {
