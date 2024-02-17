@@ -14,6 +14,7 @@ import { AuthService } from "./auth/auth.service";
 import { PassportModule } from "@nestjs/passport";
 import { LocalStrategy } from "./auth/local.strategy";
 import { QuestionModule } from "./question/question.module";
+import { UpvoteModule } from './upvote/upvote.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { QuestionModule } from "./question/question.module";
     }),
     EventModule,
     QuestionModule,
+    UpvoteModule,
   ],
   controllers: [AppController, UserController],
   providers: [AppService, AuthService, LocalStrategy, UserService, JwtStrategy],

@@ -15,7 +15,7 @@ export class Upvote {
 
   @CreateDateColumn({
     type: "timestamptz",
-    default: () => "CURRENT_TIMPESTAMP",
+    default: () => "CURRENT_TIMESTAMP",
   })
   timestamp: Date;
 
