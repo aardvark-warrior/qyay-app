@@ -1,4 +1,4 @@
-import type { User, Event, EventWithUserData, Question } from "@/lib/types";
+import type { User, Event, EventWithUserData, Question, Upvote } from "@/lib/types";
 import {
   getAuthenticatedUser,
   getAuthenticatedUserToken,
@@ -187,6 +187,30 @@ export const createQuestion = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ content }),
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+};
+
+export const createUpvote = async (
+  eventId: string,
+  questionId: string,
+): Promise<Upvote> => {
+  // const newUpvote: Upvote = {
+  //   id: "asdf",
+  //   questionId: "asdf",
+  // }
+  // return newUpvote;
+  const response = await fetch(`${API_URL}/events/${eventId}/questions/${questionId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   const responseJson = await response.json();
 

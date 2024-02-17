@@ -22,7 +22,7 @@ export type User = {
 
 export type Upvote = {
   id: string;
-  eventId: string;
+  questionId: string;
   // TODO: uniquely associate like with anon user
 }
 

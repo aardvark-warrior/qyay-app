@@ -26,7 +26,7 @@ function useQueryQuestions() {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     if (selectedEventId) {
       loadQuestions();
     } else {
