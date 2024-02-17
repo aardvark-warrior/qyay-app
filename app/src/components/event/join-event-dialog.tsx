@@ -9,27 +9,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useToast } from "@/components/ui/use-toast";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useQueryEvents from "@/hooks/use-query-events";
 
 export const JoinEventDialog = () => {
-  const { toast } = useToast();
-  const { loadEvent } = useQueryEvents();
   const [uniqueID, setUniqueID] = useState("");
 
   const handleJoin = async () => {
-    // if (!uniqueID) {
-    //   toast({
-    //     variant: "destructive",
-    //     title: "Sorry! Event ID cannot be empty! 🙁",
-    //     description: `Please enter the unique ID for your event.`,
-    //   });
-    //   return;
-    // }
     setUniqueID("");
   };
 

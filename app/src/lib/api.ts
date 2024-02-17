@@ -204,12 +204,13 @@ export const createQuestion = async (
   return responseJson.data;
 };
 
+// Create new upvote
 export const createUpvote = async (
   eventId: string,
   questionId: string,
 ): Promise<Upvote> => {
   const response = await fetch(
-    `${API_URL}/events/${eventId}/questions/${questionId}`,
+    `${API_URL}/events/${eventId}/questions/${questionId}/upvotes`,
     {
       method: "POST",
       headers: {
@@ -222,6 +223,6 @@ export const createUpvote = async (
   if (!response.ok) {
     handleError(response, responseJson.message);
   }
-
+  console.log("Upvote frontend API call");
   return responseJson.data;
 };
