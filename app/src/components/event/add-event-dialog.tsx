@@ -34,6 +34,7 @@ export const AddEventDialog = () => {
       });
       return;
     }
+    console.log("hi")
     await addNewEvent(name, description);
     setName("");
     setDescription("");
@@ -63,7 +64,7 @@ export const AddEventDialog = () => {
         {user && (
           <div className="grid gap-4 py-4">
             <div className="grid items-center grid-cols-4 gap-4">
-              <Label htmlFor="Event Name" className="text-right">
+              <Label htmlFor="name" className="text-right">
                 Event Name
               </Label>
               <Input
@@ -74,7 +75,7 @@ export const AddEventDialog = () => {
                   setName(e.target.value);
                 }}
               />
-              <Label htmlFor="Event Description" className="text-right">
+              <Label htmlFor="description" className="text-right">
                 Description
               </Label>
               <Textarea

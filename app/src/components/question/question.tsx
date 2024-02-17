@@ -3,10 +3,12 @@ import { formatTimestamp } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { useStore } from "@/lib/store";
 
 const Question = ({ question }: { question: Question }) => {
   const { content, timestamp } = question;
   const [ upvotes, setUpvotes ] = useState(0);
+  const { user } = useStore((state) => state);
 
   return (
     <div className="px-4 pt-4 pb-2 border-b border-slate-200">
@@ -15,6 +17,7 @@ const Question = ({ question }: { question: Question }) => {
         <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
       <div className="flex justify-end pt-2">
+      {!user &&
         <Button 
           size="sm" 
           variant="ghost" 
@@ -24,6 +27,12 @@ const Question = ({ question }: { question: Question }) => {
           <DoubleArrowUpIcon className="mr-1 mb-1"/> Upvote 
           {upvotes > 0 && <sup>{upvotes}</sup>}
         </Button>
+      }
+      {user &&
+        <p className="text-xs text-muted-foreground">
+          Upvotes: {upvotes}
+        </p>
+      }
       </div>
     </div>
   );

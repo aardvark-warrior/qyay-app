@@ -22,14 +22,14 @@ export const JoinEventDialog = () => {
   const [uniqueID, setUniqueID] = useState("");
 
   const handleJoin = async () => {
-    if (!uniqueID) {
-      toast({
-        variant: "destructive",
-        title: "Sorry! Name cannot be empty! 🙁",
-        description: `Please enter the name for your event.`,
-      });
-      return;
-    }
+    // if (!uniqueID) {
+    //   toast({
+    //     variant: "destructive",
+    //     title: "Sorry! Event ID cannot be empty! 🙁",
+    //     description: `Please enter the unique ID for your event.`,
+    //   });
+    //   return;
+    // }
     setUniqueID("");
   };
 
@@ -53,11 +53,11 @@ export const JoinEventDialog = () => {
         </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid items-center grid-cols-4 gap-4">
-              <Label htmlFor="Event Name" className="text-right">
+              <Label htmlFor="uniqueID" className="text-right">
                 Event ID
               </Label>
               <Input
-                id="name"
+                id="uniqueID"
                 value={uniqueID}
                 className="col-span-3"
                 onChange={(e) => {
@@ -73,10 +73,10 @@ export const JoinEventDialog = () => {
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button type="submit" onClick={handleJoin}>
-                <Link to={ `events/${uniqueID}` } >
-                  Join
-                </Link>
+              <Button type="submit" onClick={handleJoin} disabled={uniqueID === ""}>
+                  <Link to={ `events/${uniqueID}` } >
+                    Join
+                  </ Link>
               </Button>
             </DialogClose>
         </DialogFooter>
