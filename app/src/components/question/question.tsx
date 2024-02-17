@@ -8,13 +8,13 @@ import useMutationsUpvotes from "@/hooks/use-mutations-upvotes";
 
 const Question = ({ question }: { question: Question }) => {
   const { id, content, timestamp, upvoteCount } = question;
-  const [ upvotes, setUpvotes ] = useState(0);
+  const [upvotes, setUpvotes] = useState(0);
   const { user } = useStore((state) => state);
   const { addNewUpvote } = useMutationsUpvotes();
 
   const handleUpvote = async () => {
     await addNewUpvote(id);
-  }
+  };
 
   useEffect(() => {
     if (upvoteCount !== upvotes) {
@@ -29,23 +29,21 @@ const Question = ({ question }: { question: Question }) => {
         <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
       <div className="flex justify-end pt-2">
-      {!user &&
-        <Button 
-          size="sm" 
-          variant="ghost" 
-          className="bg-slate-100 hover:bg-slate-300"
-          // onClick={() => setUpvotes(upvotes + 1)}
-          onClick={handleUpvote}
-        >
-          <DoubleArrowUpIcon className="mr-1 mb-1"/> Upvote 
-          {upvotes > 0 && <sup>{upvotes}</sup>}
-        </Button>
-      }
-      {user &&
-        <p className="text-xs text-muted-foreground">
-          Upvotes: {upvotes}
-        </p>
-      }
+        {!user && (
+          <Button
+            size="sm"
+            variant="ghost"
+            className="bg-slate-100 hover:bg-slate-300"
+            // onClick={() => setUpvotes(upvotes + 1)}
+            onClick={handleUpvote}
+          >
+            <DoubleArrowUpIcon className="mr-1 mb-1" /> Upvote
+            {upvotes > 0 && <sup>{upvotes}</sup>}
+          </Button>
+        )}
+        {user && (
+          <p className="text-xs text-muted-foreground">Upvotes: {upvotes}</p>
+        )}
       </div>
     </div>
   );

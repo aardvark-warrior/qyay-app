@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "@/lib/store";
 import { JoinEventDialog } from "./event/join-event-dialog";
 
-const Sidebar = ({isEventView=false}: {isEventView?: boolean}) => {
+const Sidebar = ({ isEventView = false }: { isEventView?: boolean }) => {
   const user = useStore((state) => state.user);
   const navigate = useNavigate();
   const handleClickHome = () => {
@@ -14,23 +14,16 @@ const Sidebar = ({isEventView=false}: {isEventView?: boolean}) => {
 
   return (
     <div className="flex flex-col gap-2 p-4">
-      <Button 
-        aria-label={"Home"} 
-        variant="outline" 
-        onClick={handleClickHome}
-      >
+      <Button aria-label={"Home"} variant="outline" onClick={handleClickHome}>
         {/* <HomeIcon className="w-5 h-5" /> */}
         Home
       </Button>
-      {!isEventView && 
+      {!isEventView && (
         <>
           {/* <AddEventDialog />  */}
-          {user 
-            ? <AddEventDialog /> 
-            : <JoinEventDialog />
-          }
+          {user ? <AddEventDialog /> : <JoinEventDialog />}
         </>
-      }
+      )}
     </div>
   );
 };

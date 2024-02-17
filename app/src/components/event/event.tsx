@@ -2,15 +2,15 @@ import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
 // import { EventViewQuestions } from "./event-view-questions";
 
-const Event = ({ 
+const Event = ({
   event,
-  isEventView = false
-}: { 
+  isEventView = false,
+}: {
   event: EventWithUserData;
   isEventView?: boolean;
 }) => {
   const { id, name, description, startTime, user } = event;
-  
+
   return (
     <div className="p-4 border-b-2 border-slate-400">
       <EventHeader
@@ -22,11 +22,11 @@ const Event = ({
         username={user?.username}
         isEventView={isEventView}
       />
-      {description && 
+      {description && (
         <div className="pt-2 text-slate-700 text-sm">
           <p className="font-bold">Description:</p> {description}
         </div>
-      }
+      )}
       {/* {!isEventView &&
         <EventViewQuestions eventId={id}/>
       } */}

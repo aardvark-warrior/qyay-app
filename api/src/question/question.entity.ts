@@ -1,10 +1,12 @@
 import { Event } from "src/event/event.entity";
+import { Upvote } from "src/upvote/upvote.entity";
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -19,12 +21,18 @@ export class Question {
   @CreateDateColumn({ type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
   timestamp: Date;
 
+  @Column({ default: 0 })
+  upvoteCount: number;
+
   @ManyToOne(() => Event, (event) => event.questions, {
-    onDelete: 'CASCADE'
+    onDelete: "CASCADE",
   })
   @JoinColumn({ name: "eventId" })
   event: Event;
 
   @Column()
   eventId: string;
+
+  @OneToMany(() => Upvote, (upvote) => upvote.question)
+  upvotes: Upvote[];
 }

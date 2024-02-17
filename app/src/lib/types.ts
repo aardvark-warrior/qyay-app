@@ -12,7 +12,7 @@ export type Question = {
   content: string;
   timestamp: string;
   upvoteCount: number;
-}
+};
 
 export type User = {
   id: number;
@@ -22,8 +22,8 @@ export type User = {
 
 export type Upvote = {
   id: string;
-  questionId: string;
+  timestamp: string;
   // TODO: uniquely associate like with anon user
-}
+};
 
 export type EventWithUserData = Event & { user?: User };

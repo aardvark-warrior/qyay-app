@@ -81,7 +81,7 @@ export class EventController {
     if (!event) {
       throw new NotFoundException(`Event with ID ${id} not found`);
     }
-    
+
     delete event.userId;
     if (withUserData) {
       delete event.user.password;

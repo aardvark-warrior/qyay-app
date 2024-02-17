@@ -2,11 +2,7 @@ import { useStore } from "@/lib/store";
 import { Button } from "../ui/button";
 import { SyntheticEvent } from "react";
 
-export const EventViewQuestions = ({
-  eventId,
-}: {
-  eventId: string;
-}) => {
+export const EventViewQuestions = ({ eventId }: { eventId: string }) => {
   const selectedEventId = useStore((state) => state.selectedEventId);
   const setSelectedEventId = useStore((state) => state.setSelectedEventId);
   const clearSelectedEventId = useStore((state) => state.clearSelectedEventId);
@@ -22,7 +18,7 @@ export const EventViewQuestions = ({
 
   return (
     <div className="flex justify-center pt-2">
-      <Button 
+      <Button
         variant="ghost"
         className="w-full p-6 bg-slate-200"
         onClick={showQuestions}
@@ -31,4 +27,4 @@ export const EventViewQuestions = ({
       </Button>
     </div>
   );
-}
+};

@@ -15,7 +15,7 @@ function useQueryQuestions() {
       const fetchedQuestions = await fetchQuestions(selectedEventId as string);
       setQuestions(fetchedQuestions);
     } catch (error) {
-            clearQuestions();
+      clearQuestions();
       toast({
         variant: "destructive",
         title: "Failed to fetch questions",

@@ -28,10 +28,10 @@ export class EventService {
     if (withUserData) {
       relations.push("user");
     }
-    
-    return this.eventRepository.findOne({ 
+
+    return this.eventRepository.findOne({
       where: { id },
-      relations, 
+      relations,
     });
   }
 
@@ -100,7 +100,7 @@ export class EventService {
     if (!event) {
       return null;
     }
-  
+
     event.questionCount += 1;
     await this.eventRepository.save(event);
     return event;

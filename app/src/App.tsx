@@ -12,7 +12,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./views/error-page";
 import EventView from "./views/event-view";
 
-
 function App() {
   const clearUser = useStore((state) => state.clearUser);
   const { toast } = useToast();
@@ -24,12 +23,11 @@ function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path:"/events/:eventId",
+      path: "/events/:eventId",
       element: <EventView />,
       errorElement: <ErrorPage />,
-      
     },
-  ]);  
+  ]);
 
   useEffect(() => {
     const token = getAuthenticatedUserToken();

@@ -9,9 +9,12 @@ function useMutationsUpvotes() {
 
   const addNewUpvote = async (questionId: string) => {
     try {
-      const newUpvote = await createUpvote(selectedEventId as string, questionId);
+      const newUpvote = await createUpvote(
+        selectedEventId as string,
+        questionId,
+      );
       addUpvote(newUpvote);
-    } catch(error) {
+    } catch (error) {
       toast({
         variant: "destructive",
         title: "Failed to upvote",
@@ -20,7 +23,7 @@ function useMutationsUpvotes() {
           "There was an error creating the upvote. Please try again later.",
       });
     }
-  }
+  };
 
   return { addNewUpvote };
 }

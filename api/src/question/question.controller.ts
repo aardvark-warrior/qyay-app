@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-} from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { QuestionService } from "./question.service";
 import { QuestionResponseDTO } from "./question-reponse.dto";
 import { CreateQuestionDTO } from "./create-question.dto";
@@ -47,9 +40,6 @@ export class QuestionController {
     @Body() createQuestionDto: CreateQuestionDTO,
     @Param("eventId") eventId: string,
   ): Promise<QuestionResponseDTO> {
-    return await this.questionService.create(
-      createQuestionDto,
-      eventId,
-    );
+    return await this.questionService.create(createQuestionDto, eventId);
   }
 }

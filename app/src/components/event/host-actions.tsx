@@ -1,6 +1,11 @@
 import { Button } from "../ui/button";
 import useMutationsEvents from "@/hooks/use-mutations-events";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import {
   Dialog,
   DialogClose,
@@ -12,14 +17,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const HostActions = ({eventId}: {eventId: string}) => {
+const HostActions = ({ eventId }: { eventId: string }) => {
   const { deleteEventById } = useMutationsEvents();
 
   return (
     <div className="flex m-1 gap-2">
       <Dialog>
         <DialogTrigger asChild>
-          <Button aria-label={"Get Event ID"} size="sm" variant="outline" >
+          <Button aria-label={"Get Event ID"} size="sm" variant="outline">
             Event ID
           </Button>
         </DialogTrigger>
@@ -51,10 +56,11 @@ const HostActions = ({eventId}: {eventId: string}) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem>
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem className="text-red-500" onClick={() => deleteEventById(eventId)}>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem
+            className="text-red-500"
+            onClick={() => deleteEventById(eventId)}
+          >
             Delete
           </DropdownMenuItem>
           {/* <DropdownMenuItem>Copy link to post</DropdownMenuItem> */}
@@ -78,10 +84,8 @@ const HostActions = ({eventId}: {eventId: string}) => {
       >
         <TrashIcon className="h-5 w-5"/>
       </Button> */}
-
-
     </div>
-  )
-}
+  );
+};
 
 export default HostActions;

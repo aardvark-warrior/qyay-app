@@ -11,7 +11,7 @@ const MainView = () => {
   useEffect(() => {
     clearSelectedEventId();
   }, []);
-  
+
   return (
     <>
       <div>

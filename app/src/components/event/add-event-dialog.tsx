@@ -34,7 +34,7 @@ export const AddEventDialog = () => {
       });
       return;
     }
-    console.log("hi")
+    console.log("hi");
     await addNewEvent(name, description);
     setName("");
     setDescription("");
@@ -48,7 +48,11 @@ export const AddEventDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button aria-label={"Create an Event"} variant="ghost" className="bg-blue-300 hover:bg-blue-200">
+        <Button
+          aria-label={"Create an Event"}
+          variant="ghost"
+          className="bg-blue-300 hover:bg-blue-200"
+        >
           New Event
         </Button>
       </DialogTrigger>

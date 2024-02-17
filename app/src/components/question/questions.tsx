@@ -9,17 +9,17 @@ const Questions = () => {
 
   return (
     <div>
-      {!user && 
+      {!user && (
         <div className="flex items-center justify-center border-b border-slate-200">
           <AddQuestionDialog />
         </div>
-      }
+      )}
       <div className="border-b-2 border-slate-400">
         {questions.length === 0 ? (
           <div className="p-4 text-center border-b border-slate-200 font-serif text-sm text-slate-400">
             No questions yet...
           </div>
-        ): (
+        ) : (
           questions.map((question) => (
             <Question question={question} key={question.id} />
           ))

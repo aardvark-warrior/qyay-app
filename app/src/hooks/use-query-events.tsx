@@ -45,7 +45,6 @@ function useQueryEvents() {
       });
     }
   };
-  
 
   useEffect(() => {
     loadEvents();

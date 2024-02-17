@@ -9,7 +9,10 @@ function useMutationQuestions() {
 
   const addNewQuestion = async (content: string) => {
     try {
-      const newQuestion = await createQuestion(selectedEventId as string, content);
+      const newQuestion = await createQuestion(
+        selectedEventId as string,
+        content,
+      );
       addQuestion(newQuestion);
     } catch (error) {
       toast({

@@ -55,33 +55,30 @@ export const AddQuestionDialog = () => {
             Provide type in your question here.
           </DialogDescription>
         </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid items-center grid-cols-4 gap-4">
-              <Textarea
-                id="content"
-                value={content}
-                className="col-span-4"
-                onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-              />
-            </div>
+        <div className="grid gap-4 py-4">
+          <div className="grid items-center grid-cols-4 gap-4">
+            <Textarea
+              id="content"
+              value={content}
+              className="col-span-4"
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+            />
           </div>
+        </div>
         <DialogFooter>
+          <DialogClose asChild>
+            <Button variant={"secondary"} type="reset" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </DialogClose>
 
-            <DialogClose asChild>
-              <Button variant={"secondary"} type="reset" onClick={handleCancel}>
-                Cancel
-              </Button>
-            </DialogClose>
-
-
-            <DialogClose asChild>
-              <Button type="submit" onClick={handleSave}>
-                Save
-              </Button>
-            </DialogClose>
-
+          <DialogClose asChild>
+            <Button type="submit" onClick={handleSave}>
+              Save
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

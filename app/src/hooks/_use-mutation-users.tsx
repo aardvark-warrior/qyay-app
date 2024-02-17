@@ -38,7 +38,6 @@ function useMutationUser() {
       });
     }
   };
-  
 
   useEffect(() => {
     try {

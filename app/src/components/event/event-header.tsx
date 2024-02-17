@@ -12,13 +12,13 @@ const EventHeader = ({
   username,
   isEventView = false,
 }: {
-  event: EventWithUserData
+  event: EventWithUserData;
   eventId: string;
   eventName: string;
   startTime: string;
   displayName?: string;
   username?: string;
-  isEventView: boolean,
+  isEventView: boolean;
 }) => {
   const { questionCount } = event;
   const [questions, setQuestions] = useState(0);
@@ -27,7 +27,7 @@ const EventHeader = ({
     if (questionCount !== questions) {
       setQuestions(questionCount);
     }
-  }, [questionCount])
+  }, [questionCount]);
 
   return (
     <>
@@ -39,18 +39,17 @@ const EventHeader = ({
             Host: {displayName || "Unknown"}
           </p>
         </div>
-        
-        {!isEventView && 
+
+        {!isEventView && (
           <div>
             <div>
-              <EventActions eventId={eventId} username={username}/>
+              <EventActions eventId={eventId} username={username} />
             </div>
             <div className="m-1 text-right text-muted-foreground text-sm">
               Questions: {questions}
             </div>
           </div>
-        }
-        
+        )}
       </div>
     </>
   );
