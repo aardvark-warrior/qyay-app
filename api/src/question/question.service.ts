@@ -46,6 +46,11 @@ export class QuestionService {
     return questions;
   }
 
+  // Find a question by id
+  async findOne(id: string): Promise<Question | null> {
+    return await this.questionRepository.findOne({where: { id }});
+  }
+
   // Creates a new instance of the Question entity and saves it to the database.
   // Returns the newly created question.
   async create(
@@ -61,5 +66,16 @@ export class QuestionService {
     await this.eventService.incrementQuestionCounter(eventId);
 
     return this.questionRepository.save(question);
+  }
+
+  // Increment upvoteCount when question is upvoted. Called by UpvoteService
+  async incrementUpvoteCounter(id: string): Promise<Question | null> {
+    const question = await this.findOne(id);
+    if (!question) {
+      return null;
+    }
+    question.upvoteCount += 1;
+    await this.questionRepository.save(question);
+    return question;
   }
 }
