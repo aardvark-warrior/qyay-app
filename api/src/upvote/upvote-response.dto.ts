@@ -1,5 +1,5 @@
 export class UpvoteResponseDTO {
   id: string;
-  timestamp: string;
+  timestamp: Date;
   questionId: string;
 }

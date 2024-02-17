@@ -15,9 +15,17 @@ export class UpvoteService {
   // CRUD Operations
   async findAll(
     questionId?: string,
+    withQuestionData?: boolean,
   ): Promise<Upvote[]> {
+    const relations = [];
+
+    if (withQuestionData) {
+      relations.push("question");
+    }
+
     const upvotes = await this.upvoteRepository.find({
       where: { questionId },
+      relations,
     });
 
     return upvotes;

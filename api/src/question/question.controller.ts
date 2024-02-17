@@ -29,9 +29,7 @@ export class QuestionController {
       offset,
       search,
       withEventData,
-      data: questions.map((question) => {
-        return question;
-      }),
+      data: questions,
     };
   }
 
