@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Upvote } from './upvote.entity';
-import { Repository } from 'typeorm';
-import { QuestionService } from 'src/question/question.service';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Upvote } from "./upvote.entity";
+import { Repository } from "typeorm";
+import { QuestionService } from "src/question/question.service";
 
 @Injectable()
 export class UpvoteService {

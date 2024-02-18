@@ -11,7 +11,7 @@ const Question = ({ question }: { question: Question }) => {
         <div className="font-serif">{content}</div>
         <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
-      <QuestionFooter question={question}/>
+      <QuestionFooter question={question} />
     </div>
   );
 };

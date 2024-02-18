@@ -12,21 +12,19 @@ function useQueryQuestions() {
   const selectedEventId = useStore((state) => state.selectedEventId);
 
   const loadQuestions = async () => {
-    // useInterval(async () => {
-      try {
-        const fetchedQuestions = await fetchQuestions(selectedEventId as string);
-        setQuestions(fetchedQuestions);
-      } catch (error) {
-        clearQuestions();
-        toast({
-          variant: "destructive",
-          title: "Failed to fetch questions",
-          description:
-            (error as Error).message ||
-            "There was an error loading the questions. Please try again later.",
-        });
-      }
-    // }, 300);
+    try {
+      const fetchedQuestions = await fetchQuestions(selectedEventId as string);
+      setQuestions(fetchedQuestions);
+    } catch (error) {
+      clearQuestions();
+      toast({
+        variant: "destructive",
+        title: "Failed to fetch questions",
+        description:
+          (error as Error).message ||
+          "There was an error loading the questions. Please try again later.",
+      });
+    }
   };
 
   useInterval(async () => {

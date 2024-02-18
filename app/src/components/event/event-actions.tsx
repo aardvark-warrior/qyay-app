@@ -1,9 +1,7 @@
 import { useStore } from "@/lib/store";
 import { Button } from "../ui/button";
-// import useMutationsEvents from "@/hooks/use-mutations-events";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import HostActions from "./host-actions";
 
 const EventActions = ({
@@ -13,7 +11,6 @@ const EventActions = ({
   eventId: string;
   username?: string;
 }) => {
-  // const { deleteEventById } = useMutationsEvents();
   const { user } = useStore((state) => state);
   const [isOwner, setIsOwner] = useState(false);
 

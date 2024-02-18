@@ -2,7 +2,6 @@ import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { validate } from "./env.validation";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./auth/jwt.strategy";
@@ -14,14 +13,12 @@ import { AuthService } from "./auth/auth.service";
 import { PassportModule } from "@nestjs/passport";
 import { LocalStrategy } from "./auth/local.strategy";
 import { QuestionModule } from "./question/question.module";
-import { UpvoteModule } from './upvote/upvote.module';
+import { UpvoteModule } from "./upvote/upvote.module";
 
 @Module({
   imports: [
     PassportModule,
-    ConfigModule.forRoot({
-      // validate,    // env.validation DB_PORT isNumber failing after adding TypeOrmModule
-    }), // Loads the .env file
+    ConfigModule.forRoot({}), // Loads the .env file
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({

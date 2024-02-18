@@ -1,14 +1,12 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { UpvoteService } from './upvote.service';
-import { UpvoteResponseDTO } from './upvote-response.dto';
-import { FindUpvotesQueryDTO } from './find-upvotes-query.dto';
-import { FindUpvotesReponseDTO } from './find-upvotes-response.dto';
+import { Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { UpvoteService } from "./upvote.service";
+import { UpvoteResponseDTO } from "./upvote-response.dto";
+import { FindUpvotesQueryDTO } from "./find-upvotes-query.dto";
+import { FindUpvotesReponseDTO } from "./find-upvotes-response.dto";
 
-@Controller('events/:eventId/questions/:questionId/upvotes')
+@Controller("events/:eventId/questions/:questionId/upvotes")
 export class UpvoteController {
-  constructor(
-    private readonly upvoteService: UpvoteService
-  ) {}
+  constructor(private readonly upvoteService: UpvoteService) {}
 
   @Get()
   async findAll(

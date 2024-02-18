@@ -11,7 +11,6 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  // prev: Promise<any>
   async validateUser(
     username: string,
     password: string,

@@ -15,53 +15,68 @@ const QuestionFooter = ({ question }: { question: Question }) => {
 
   const handleUpvote = async () => {
     await addNewUpvote(id);
-    setUpvotes(upvotes + 1)
+    setUpvotes(upvotes + 1);
   };
 
   const handleAnswer = async () => {
     await updateExistingQuestion(id);
-  }
+  };
 
   useEffect(() => {
     if (upvoteCount !== upvotes) {
       setUpvotes(upvoteCount);
     }
   }, [upvoteCount]);
-  
+
   return (
-  <div className="flex justify-between align-bottom">
-    {user
-      ? 
-      <>
-        {isAnswered
-          ? <Button variant="outline" size="sm" className="w-32 bg-emerald-100" onClick={handleAnswer}>Answered</Button>
-          : <Button variant="outline" size="sm" className="w-32" onClick={handleAnswer}>Not Answered</Button>
-        }
-      </>
-      : 
-      <div className="text-xs text-muted-foreground pt-3">
-        {isAnswered
-          ? "Already answered by host!"//<Badge variant="secondary" className="bg-emerald-0">Answered</Badge>
-          : "Not yet answered"//<Badge variant="secondary">Not Answered</Badge>
-        }
-      </div>
-      
-    }
-    {!user && (
-      <Button
-        size="sm"
-        variant="ghost"
-        className="bg-slate-100 hover:bg-slate-300"
-        onClick={handleUpvote}
-      >
-        <DoubleArrowUpIcon className="mr-1 mb-1" /> Upvote {upvotes > 0 && <sup>{upvotes}</sup>}
-      </Button>
-    )}
-    {user && (
-      <p className="text-xs text-muted-foreground">Upvotes: {upvotes}</p>
-    )}
-  </div>
+    <div className="flex justify-between align-bottom">
+      {user ? (
+        <>
+          {isAnswered ? (
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-32 bg-emerald-100"
+              onClick={handleAnswer}
+            >
+              Answered
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-32"
+              onClick={handleAnswer}
+            >
+              Not Answered
+            </Button>
+          )}
+        </>
+      ) : (
+        <div className="text-xs text-muted-foreground pt-3">
+          {
+            isAnswered
+              ? "Already answered by host!" //<Badge variant="secondary" className="bg-emerald-0">Answered</Badge>
+              : "Not yet answered" //<Badge variant="secondary">Not Answered</Badge>
+          }
+        </div>
+      )}
+      {!user && (
+        <Button
+          size="sm"
+          variant="ghost"
+          className="bg-slate-100 hover:bg-slate-300"
+          onClick={handleUpvote}
+        >
+          <DoubleArrowUpIcon className="mr-1 mb-1" /> Upvote{" "}
+          {upvotes > 0 && <sup>{upvotes}</sup>}
+        </Button>
+      )}
+      {user && (
+        <p className="text-xs text-muted-foreground">Upvotes: {upvotes}</p>
+      )}
+    </div>
   );
-}
+};
 
 export default QuestionFooter;

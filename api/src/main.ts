@@ -7,7 +7,6 @@ import { HttpResponseInterceptor } from "./interceptors/http-response.intercepto
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      // <-- Add this option
       origin: process.env.CLIENT_URL,
     },
   });

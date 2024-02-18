@@ -28,10 +28,7 @@ function useMutationsQuestions() {
 
   const updateExistingQuestion = async (id: string) => {
     try {
-      const updatedQuestion = await update(
-        selectedEventId as string,
-        id,
-      );
+      const updatedQuestion = await update(selectedEventId as string, id);
       updateQuestion(updatedQuestion);
     } catch (error) {
       toast({
@@ -42,9 +39,9 @@ function useMutationsQuestions() {
           "There was an error answering the question. Please try again later.",
       });
     }
-  }
+  };
 
-  return { addNewQuestion, updateExistingQuestion};
+  return { addNewQuestion, updateExistingQuestion };
 }
 
 export default useMutationsQuestions;

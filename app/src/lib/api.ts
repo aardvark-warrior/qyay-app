@@ -72,11 +72,6 @@ export const createEvent = async (
 
   if (!response.ok) {
     handleError(response, responseJson.message);
-    // throw new Error(
-    //   `Error: ${response.status} - ${
-    //     responseJson.message || response.statusText
-    //   }`,
-    // );
   }
 
   return {
@@ -99,11 +94,6 @@ export const deleteEvent = async (id: string): Promise<void> => {
 
   if (!response.ok) {
     handleError(response, responseJson.message);
-    // throw new Error(
-    //   `Error: ${response.status} - ${
-    //     responseJson.message || response.statusText
-    //   }`,
-    // );
   }
 };
 
@@ -221,7 +211,7 @@ export const updateQuestion = async (
   }
 
   return responseJson.data;
-}
+};
 
 // Create new upvote
 export const createUpvote = async (

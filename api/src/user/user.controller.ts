@@ -5,7 +5,7 @@ import { AuthService } from "src/auth/auth.service";
 import { UserResponseDTO } from "./user-reponse.dto";
 import { UserLoginDTO } from "./user-login.dto";
 
-@Controller("users") // endpoint name
+@Controller("users") 
 export class UserController {
   constructor(
     private readonly userService: UserService,
@@ -17,13 +17,9 @@ export class UserController {
     const user = await this.userService.createUser(userDto);
     delete user.password;
     return user;
-    // Alternatively
-    // const { password, ...userOutput } = user;
-    // return userOutput;
   }
 
   @Post("login")
-  // prev: Promise<UserResponseDTO>
   async login(
     @Body() userDto: UserLoginDTO,
   ): Promise<{ access_token: string }> {
@@ -34,7 +30,7 @@ export class UserController {
     if (!user) {
       throw new UnauthorizedException("Invalid credentials");
     }
-    // TODO prev: return user;
+
     return this.authService.login(user);
   }
 }

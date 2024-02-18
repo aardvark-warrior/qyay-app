@@ -19,7 +19,6 @@ export class HttpResponseFilter {
     if (exception instanceof HttpException) {
       const exceptionResponse = exception.getResponse();
 
-      // prev: if (typeof response === "object" && "data" in response) {
       if (typeof exceptionResponse === "string") {
         // If the response is a string, set it as the message
         errorResponse["message"] = exceptionResponse;

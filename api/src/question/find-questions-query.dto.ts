@@ -28,8 +28,4 @@ export class FindQuestionsQueryDTO {
   @IsBoolean()
   @IsOptional()
   withEventData?: boolean;
-
-  // @IsBoolean()
-  // @IsOptional()
-  // withUserData?: boolean;
 }

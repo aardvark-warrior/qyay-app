@@ -50,7 +50,6 @@ const HostActions = ({ eventId }: { eventId: string }) => {
             size="sm"
             className="flex bg-blue-200 hover:bg-blue-100 data-[state=open]:bg-muted"
           >
-            {/* <DotsHorizontalIcon className="w-4 h-4" /> */}
             Change Event
             <span className="sr-only">Open menu</span>
           </Button>
@@ -63,27 +62,8 @@ const HostActions = ({ eventId }: { eventId: string }) => {
           >
             Delete
           </DropdownMenuItem>
-          {/* <DropdownMenuItem>Copy link to post</DropdownMenuItem> */}
-          {/* <DropdownMenuItem className="text-red-500">Report post</DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {/* <Button
-        className="m-1 bg-slate-200"
-        variant="ghost"
-        size="sm"
-        //TODO: add editEvent dialog
-      >
-        <Pencil2Icon className="h-5 w-5"/>
-      </Button>
-      
-      <Button
-        className="m-1"
-        size="sm"
-        onClick={() => deleteEventById(eventId)}
-      >
-        <TrashIcon className="h-5 w-5"/>
-      </Button> */}
     </div>
   );
 };

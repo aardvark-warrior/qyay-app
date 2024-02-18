@@ -1,6 +1,5 @@
 import { EventWithUserData } from "@/lib/types";
 import EventHeader from "./event-header";
-// import { EventViewQuestions } from "./event-view-questions";
 
 const Event = ({
   event,
@@ -24,12 +23,9 @@ const Event = ({
       />
       {description && (
         <div className="pt-2 text-slate-700 text-sm">
-          <p className="">Description: {description}</p> 
+          <p className="">Description: {description}</p>
         </div>
       )}
-      {/* {!isEventView &&
-        <EventViewQuestions eventId={id}/>
-      } */}
     </div>
   );
 };

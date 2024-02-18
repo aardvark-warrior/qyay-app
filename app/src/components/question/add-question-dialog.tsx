@@ -39,7 +39,7 @@ export const AddQuestionDialog = () => {
 
   return (
     <div className="flex items-center justify-center border-b border-slate-200">
-      < Dialog>
+      <Dialog>
         <DialogTrigger asChild>
           <Button
             aria-label={"Ask a Question"}

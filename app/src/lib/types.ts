@@ -24,7 +24,6 @@ export type User = {
 export type Upvote = {
   id: string;
   timestamp: string;
-  // TODO: uniquely associate like with anon user
 };
 
 export type EventWithUserData = Event & { user?: User };

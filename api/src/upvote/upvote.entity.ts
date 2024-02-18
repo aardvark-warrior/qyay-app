@@ -24,7 +24,7 @@ export class Upvote {
   })
   @JoinColumn({ name: "questionId" })
   question: Question;
-  
+
   @Column()
   questionId: string;
 }

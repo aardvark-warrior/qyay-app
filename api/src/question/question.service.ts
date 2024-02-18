@@ -48,7 +48,7 @@ export class QuestionService {
 
   // Find a question by id
   async findOne(id: string): Promise<Question | null> {
-    return await this.questionRepository.findOne({where: { id }});
+    return await this.questionRepository.findOne({ where: { id } });
   }
 
   // Creates a new instance of the Question entity and saves it to the database.

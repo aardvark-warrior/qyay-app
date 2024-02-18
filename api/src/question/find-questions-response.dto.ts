@@ -5,6 +5,5 @@ export class FindQuestionsResponseDTO {
   offset: number;
   search?: string;
   withEventData?: boolean;
-  // withUserData?: boolean;
   data: QuestionResponseDTO[];
 }

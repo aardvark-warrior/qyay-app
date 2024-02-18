@@ -25,9 +25,7 @@ const EventView = () => {
       <div className="flex justify-between">
         <Sidebar isEventView={true} />
         <div className="flex flex-col w-full min-h-screen border-x-2 border-slate-400 md:max-w-xl">
-          {event && 
-            <Event event={event} isEventView={true} />
-          }
+          {event && <Event event={event} isEventView={true} />}
           {event && selectedEventId && <Questions />}
         </div>
         <Aside />
