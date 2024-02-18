@@ -17,13 +17,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { useStore } from "@/lib/store";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { combineDateTime } from "@/lib/utils";
 
 export const AddEventDialog = () => {
   const { toast } = useToast();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const { addNewEvent } = useMutationEvents();
   const user = useStore((state) => state.user);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
 
   const handleSave = async () => {
     if (!name) {
@@ -34,14 +37,18 @@ export const AddEventDialog = () => {
       });
       return;
     }
-    await addNewEvent(name, description);
+    await addNewEvent(name, description, combineDateTime(date, time));
     setName("");
     setDescription("");
+    setDate("");
+    setTime("");
   };
 
   const handleCancel = () => {
     setName("");
     setDescription("");
+    setDate("");
+    setTime("");
   };
 
   return (
@@ -87,6 +94,30 @@ export const AddEventDialog = () => {
                 className="flex h-full col-span-3"
                 onChange={(e) => {
                   setDescription(e.target.value);
+                }}
+              />
+              <Label htmlFor="date" className="text-right">
+                Event Date
+              </Label>
+              <Input
+                id="date"
+                value={date}
+                type="date"
+                className="col-span-3"
+                onChange={(e) => {
+                  setDate(e.target.value);
+                }}
+              />
+              <Label htmlFor="time" className="text-right">
+                Event Time
+              </Label>
+              <Input
+                id="time"
+                value={time}
+                type="time"
+                className="col-span-3"
+                onChange={(e) => {
+                  setTime(e.target.value);
                 }}
               />
             </div>
