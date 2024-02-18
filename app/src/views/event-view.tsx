@@ -30,6 +30,7 @@ const EventView = () => {
           }
           {event && selectedEventId && <Questions />}
         </div>
+        <Aside />
       </div>
     </>
   );
