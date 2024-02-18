@@ -29,7 +29,17 @@ To get started with this project, follow these steps:
 3. As an organizer, I want to mark questions as answered, so that the audience knows which questions have been addressed. (Nice-to-Have)
 
 ### Instructions
-1. Follow instructions in [Getting Started](#getting-started) and [Iteration 3](#iteration-3) to create an account as Host and create an event.
+* **Note**: To simultaneously see the Host and Audience view of the app, open a regular browser window and an incognito/private browsing window side-by-side. Visit the website in both windows. Login as Host in one of the windows and remain as guest in the other. 
+
+1. **Preparation**: Refer to [Iteration 3](#iteration-3) for instructions on registering, logging in, and creating an event as Host. Get the unique `Event ID` for your event and provide it to your audience (Host side). In the other browser window, click `Join Event` from the home page and paste in the `Event ID` (Audience side).
+
+2. **Audience Join Event**: After joining the event on the Audience side, you can begin asking questions by clicking the `Ask a Question` button, typing in your question, and pressing `Save`. 
+
+3. **Audience Upvote Questions**: Everyone in the event will be able to see each other's questions. You can upvote any question on the page by clicking the `Upvote` button. This will show the Host which questions are most popular.
+
+4. **Host View Questions**: On the Host side, you can moderate an event by clicking the `Moderate Event` button on the event you created. This will take you to a real-time list of questions submitted by the Audience.
+
+5. **Host Marking Questions as Answered**: From the list of real-time questions, you can click on the `Answered`/`Not Answered` button in the bottom left of each question. Toggling this will update the Audience side in real-time to show which questions have been answered and which ones are still pending.
 
 ## Iteration 3
 
@@ -46,7 +56,7 @@ To get started with this project, follow these steps:
 
 3. **Event Actions (Host)**: There are three action buttons for each event - 1. `Event ID`, which shows the unique ID the your audience can enter into the app to join your event. 2. `Change Event`, which shows a drop down with `Delete` option. 3. `Moderate Event`, which takes you to the event's page with all the questions that the audience has asked.
 
-4. **Joining an Event (Audience)**: Starting in the Home Page (`http://localhost:5173`) and click the `Join Event` button in the left side bar. This will show a pop-up textbox for you to enter the unique `Event ID` provided by the Host. Click `Join` to be taken to the event's Q&A page. Note: if you entered the wrong ID or the event page failed to load, press the `Home` button in the left sidebar to restart at the home page.
+4. **Joining an Event (Audience)**: Starting in the Home Page (`http://localhost:5173`), click the `Join Event` button in the left side bar. This will show a pop-up textbox for you to enter the unique `Event ID` provided by the Host. Click `Join` to be taken to the event's Q&A page. Note: if you entered the wrong ID or the event page failed to load, press the `Home` button in the left sidebar to restart at the home page.
 
 5. **Asking Questions (Audience)**:
 In the event Q&A page, click the `Ask a Question` button to type in your question and click `Save`.
