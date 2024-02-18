@@ -6,7 +6,7 @@ import { useStore } from "@/lib/store";
 import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
 import useMutationsQuestions from "@/hooks/use-mutations-questions";
 
-const QuestionUpvotes = ({ question }: { question: Question }) => {
+const QuestionFooter = ({ question }: { question: Question }) => {
   const { id, upvoteCount, isAnswered } = question;
   const [upvotes, setUpvotes] = useState(0);
   const { user } = useStore((state) => state);
@@ -15,6 +15,7 @@ const QuestionUpvotes = ({ question }: { question: Question }) => {
 
   const handleUpvote = async () => {
     await addNewUpvote(id);
+    setUpvotes(upvotes + 1)
   };
 
   const handleAnswer = async () => {
@@ -51,7 +52,6 @@ const QuestionUpvotes = ({ question }: { question: Question }) => {
         size="sm"
         variant="ghost"
         className="bg-slate-100 hover:bg-slate-300"
-        // onClick={() => setUpvotes(upvotes + 1)}
         onClick={handleUpvote}
       >
         <DoubleArrowUpIcon className="mr-1 mb-1" /> Upvote {upvotes > 0 && <sup>{upvotes}</sup>}
@@ -64,4 +64,4 @@ const QuestionUpvotes = ({ question }: { question: Question }) => {
   );
 }
 
-export default QuestionUpvotes;
+export default QuestionFooter;

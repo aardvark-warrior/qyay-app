@@ -1,6 +1,6 @@
 import type { Question } from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
-import QuestionUpvotes from "./question-upvotes";
+import QuestionFooter from "./question-footer";
 
 const Question = ({ question }: { question: Question }) => {
   const { content, timestamp } = question;
@@ -11,7 +11,7 @@ const Question = ({ question }: { question: Question }) => {
         <div className="font-serif">{content}</div>
         <div className="text-xs opacity-30">{formatTimestamp(timestamp)}</div>
       </div>
-      <QuestionUpvotes question={question}/>
+      <QuestionFooter question={question}/>
     </div>
   );
 };
