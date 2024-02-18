@@ -3,6 +3,7 @@ import { fetchEventById, fetchEvents } from "@/lib/api";
 import { useStore } from "@/lib/store";
 import { useToast } from "@/components/ui/use-toast";
 import { EventWithUserData } from "@/lib/types";
+import useInterval from "./use-interval";
 
 function useQueryEvents() {
   const { toast } = useToast();
@@ -45,6 +46,10 @@ function useQueryEvents() {
       });
     }
   };
+
+  useInterval(async () => {
+    loadEvents();
+  }, 300);
 
   useEffect(() => {
     loadEvents();
