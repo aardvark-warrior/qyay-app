@@ -12,6 +12,7 @@ export type Question = {
   content: string;
   timestamp: string;
   upvoteCount: number;
+  isAnswered: boolean;
 };
 
 export type User = {

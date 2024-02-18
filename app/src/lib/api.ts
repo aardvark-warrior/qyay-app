@@ -204,6 +204,25 @@ export const createQuestion = async (
   return responseJson.data;
 };
 
+export const updateQuestion = async (
+  eventId: string,
+  id: string,
+): Promise<Question> => {
+  const response = await fetch(`${API_URL}/events/${eventId}/questions/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+
+  return responseJson.data;
+}
+
 // Create new upvote
 export const createUpvote = async (
   eventId: string,

@@ -25,6 +25,7 @@ type Action = {
   // Question
   setQuestions: (questions: Question[]) => void;
   addQuestion: (question: Question) => void;
+  updateQuestion: (question: Question) => void;
   clearQuestions: () => void;
   // Upvote
   addUpvote: (upvote: Upvote) => void;
@@ -66,6 +67,10 @@ export const useStore = create<State & Action>()(
 
     addQuestion: (question) => {
       set({ questions: [question, ...get().questions] });
+    },
+
+    updateQuestion: (question) => {
+      set({ questions: [question, ...get().questions.filter((oldQuestions) => oldQuestions.id !== question.id)] });
     },
 
     clearQuestions: () => set({ questions: [] }),

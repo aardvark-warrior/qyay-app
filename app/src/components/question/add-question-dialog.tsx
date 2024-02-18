@@ -13,11 +13,11 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import useMutationQuestions from "@/hooks/use-mutations-questions";
+import useMutationsQuestions from "@/hooks/use-mutations-questions";
 
 export const AddQuestionDialog = () => {
   const [content, setContent] = useState("");
-  const { addNewQuestion } = useMutationQuestions();
+  const { addNewQuestion } = useMutationsQuestions();
   const { toast } = useToast();
 
   const handleSave = async () => {

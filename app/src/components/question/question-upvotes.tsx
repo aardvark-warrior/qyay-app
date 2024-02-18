@@ -4,17 +4,23 @@ import { Question } from "@/lib/types";
 import useMutationsUpvotes from "@/hooks/use-mutations-upvotes";
 import { useStore } from "@/lib/store";
 import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
+import { Badge } from "@/components/ui/badge"
+import useMutationsQuestions from "@/hooks/use-mutations-questions";
 
 const QuestionUpvotes = ({ question }: { question: Question }) => {
-  const { id, upvoteCount } = question;
+  const { id, upvoteCount, isAnswered } = question;
   const [upvotes, setUpvotes] = useState(0);
   const { user } = useStore((state) => state);
   const { addNewUpvote } = useMutationsUpvotes();
+  const { updateExistingQuestion } = useMutationsQuestions();
 
   const handleUpvote = async () => {
-    console.log("handleUpvote");
     await addNewUpvote(id);
   };
+
+  const handleAnswer = async () => {
+    await updateExistingQuestion(id);
+  }
 
   useEffect(() => {
     if (upvoteCount !== upvotes) {
@@ -23,7 +29,24 @@ const QuestionUpvotes = ({ question }: { question: Question }) => {
   }, [upvoteCount]);
   
   return (
-  <div className="flex justify-end pt-2">
+  <div className="flex justify-between pt-2">
+    {user
+      ? 
+      <>
+        {isAnswered
+          ? <Button variant="outline" size="sm" className="bg-emerald-100" onClick={handleAnswer}>Answered</Button>
+          : <Button variant="outline" size="sm" onClick={handleAnswer}>Not Answered</Button>
+        }
+      </>
+      : 
+      <div className="text-xs text-muted-foreground pt-3">
+        {isAnswered
+          ? "Already answered by host!"//<Badge variant="secondary" className="bg-emerald-0">Answered</Badge>
+          : "Not yet answered"//<Badge variant="secondary">Not Answered</Badge>
+        }
+      </div>
+      
+    }
     {!user && (
       <Button
         size="sm"
