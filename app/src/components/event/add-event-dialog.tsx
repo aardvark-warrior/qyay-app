@@ -37,7 +37,11 @@ export const AddEventDialog = () => {
       });
       return;
     }
-    await addNewEvent(name, description, combineDateTime(date, time));
+    if (date && time) {
+      await addNewEvent(name, description, combineDateTime(date, time));
+    } else {
+      await addNewEvent(name, description);
+    }
     setName("");
     setDescription("");
     setDate("");

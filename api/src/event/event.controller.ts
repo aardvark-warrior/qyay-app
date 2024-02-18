@@ -42,7 +42,7 @@ export class EventController {
       const user = await this.userService.findOne(username);
       if (!user) {
         throw new NotFoundException(
-          "User with username ${username} not found.",
+          `User with username ${username} not found.`,
         );
       }
       userId = user.id;

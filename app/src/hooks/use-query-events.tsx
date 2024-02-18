@@ -12,10 +12,11 @@ function useQueryEvents() {
   const setSelectedEventId = useStore((state) => state.setSelectedEventId);
   const clearSelectedEventId = useStore((state) => state.clearSelectedEventId);
   const [event, setEvent] = useState<EventWithUserData | null>(null);
+  const user = useStore((state) => state.user);
 
   const loadEvents = async () => {
     try {
-      const fetchedEventsWithUserData = await fetchEvents(); // API call to query information from Backend
+      const fetchedEventsWithUserData = await fetchEvents(user?.username); // API call to query information from Backend
       setEvents(fetchedEventsWithUserData); // Zustand Action call to update Global states for Frontend
     } catch (error) {
       toast({

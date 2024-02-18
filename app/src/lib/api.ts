@@ -26,8 +26,10 @@ const handleError = (response: Response, message?: string) => {
 };
 
 // Fetch all events with user data
-export const fetchEvents = async (): Promise<EventWithUserData[]> => {
-  const response = await fetch(`${API_URL}/events?withUserData=true`);
+export const fetchEvents = async (username?: string): Promise<EventWithUserData[]> => {
+  const response = (username) 
+    ? await fetch(`${API_URL}/events?withUserData=true&username=${username}`) 
+    : await fetch(`${API_URL}/events?withUserData=true`);
   const responseJson = await response.json();
 
   if (!response.ok) {
