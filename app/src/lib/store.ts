@@ -70,7 +70,10 @@ export const useStore = create<State & Action>()(
     },
 
     updateQuestion: (question) => {
-      set({ questions: [question, ...get().questions.filter((oldQuestions) => oldQuestions.id !== question.id)] });
+      const idx = get().questions.findIndex((oldQuestion) => oldQuestion.id === question.id);
+      const questionsCpy = [...get().questions];
+      questionsCpy[idx] = question;
+      set({ questions: [...questionsCpy]})
     },
 
     clearQuestions: () => set({ questions: [] }),

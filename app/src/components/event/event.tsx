@@ -24,7 +24,7 @@ const Event = ({
       />
       {description && (
         <div className="pt-2 text-slate-700 text-sm">
-          <p className="font-bold">Description:</p> {description}
+          <p className="">Description: {description}</p> 
         </div>
       )}
       {/* {!isEventView &&

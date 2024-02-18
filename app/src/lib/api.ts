@@ -242,6 +242,5 @@ export const createUpvote = async (
   if (!response.ok) {
     handleError(response, responseJson.message);
   }
-  console.log("Upvote frontend API call");
   return responseJson.data;
 };

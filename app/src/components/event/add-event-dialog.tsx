@@ -34,7 +34,6 @@ export const AddEventDialog = () => {
       });
       return;
     }
-    console.log("hi");
     await addNewEvent(name, description);
     setName("");
     setDescription("");

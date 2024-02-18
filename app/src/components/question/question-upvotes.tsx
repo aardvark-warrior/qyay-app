@@ -28,13 +28,13 @@ const QuestionUpvotes = ({ question }: { question: Question }) => {
   }, [upvoteCount]);
   
   return (
-  <div className="flex justify-between pt-2">
+  <div className="flex justify-between align-bottom">
     {user
       ? 
       <>
         {isAnswered
-          ? <Button variant="outline" size="sm" className="bg-emerald-100" onClick={handleAnswer}>Answered</Button>
-          : <Button variant="outline" size="sm" onClick={handleAnswer}>Not Answered</Button>
+          ? <Button variant="outline" size="sm" className="w-32 bg-emerald-100" onClick={handleAnswer}>Answered</Button>
+          : <Button variant="outline" size="sm" className="w-32" onClick={handleAnswer}>Not Answered</Button>
         }
       </>
       : 
