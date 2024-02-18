@@ -24,6 +24,9 @@ export class Question {
   @Column({ default: 0 })
   upvoteCount: number;
 
+  @Column({ default: false })
+  isAnswered: boolean;
+
   @ManyToOne(() => Event, (event) => event.questions, {
     onDelete: "CASCADE",
   })

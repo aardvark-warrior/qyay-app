@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post, Query } from "@nestjs/common";
 import { QuestionService } from "./question.service";
 import { QuestionResponseDTO } from "./question-reponse.dto";
 import { CreateQuestionDTO } from "./create-question.dto";
@@ -39,5 +39,12 @@ export class QuestionController {
     @Param("eventId") eventId: string,
   ): Promise<QuestionResponseDTO> {
     return await this.questionService.create(createQuestionDto, eventId);
+  }
+
+  @Patch(":id")
+  async toggleAnswered(
+    @Param("id") id: string,
+  ): Promise<QuestionResponseDTO> {
+    return await this.questionService.toggleAnswered(id);
   }
 }

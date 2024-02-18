@@ -78,4 +78,14 @@ export class QuestionService {
     await this.questionRepository.save(question);
     return question;
   }
+
+  async toggleAnswered(id: string): Promise<Question | null> {
+    const question = await this.findOne(id);
+    if (!question) {
+      return null;
+    }
+    question.isAnswered = !question.isAnswered;
+    await this.questionRepository.save(question);
+    return question;
+  }
 }
