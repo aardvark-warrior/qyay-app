@@ -79,7 +79,7 @@ export class QuestionService {
     return question;
   }
 
-  async toggleAnswered(id: string): Promise<Question | null> {
+  async updateQuestion(id: string): Promise<Question | null> {
     const question = await this.findOne(id);
     if (!question) {
       return null;

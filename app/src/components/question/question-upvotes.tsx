@@ -4,7 +4,6 @@ import { Question } from "@/lib/types";
 import useMutationsUpvotes from "@/hooks/use-mutations-upvotes";
 import { useStore } from "@/lib/store";
 import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
-import { Badge } from "@/components/ui/badge"
 import useMutationsQuestions from "@/hooks/use-mutations-questions";
 
 const QuestionUpvotes = ({ question }: { question: Question }) => {

@@ -45,6 +45,6 @@ export class QuestionController {
   async toggleAnswered(
     @Param("id") id: string,
   ): Promise<QuestionResponseDTO> {
-    return await this.questionService.toggleAnswered(id);
+    return await this.questionService.updateQuestion(id);
   }
 }
