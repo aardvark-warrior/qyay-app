@@ -38,49 +38,51 @@ export const AddQuestionDialog = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          aria-label={"Ask a Question"}
-          variant="secondary"
-          className="w-full my-2 mx-4 bg-green-50 hover:bg-green-200"
-        >
-          Ask a Question
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
-        <DialogHeader>
-          <DialogTitle>Ask Question</DialogTitle>
-          <DialogDescription>
-            Provide type in your question here.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid items-center grid-cols-4 gap-4">
-            <Textarea
-              id="content"
-              value={content}
-              className="col-span-4"
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            />
+    <div className="flex items-center justify-center border-b border-slate-200">
+      < Dialog>
+        <DialogTrigger asChild>
+          <Button
+            aria-label={"Ask a Question"}
+            variant="secondary"
+            className="w-full my-2 mx-4 bg-green-50 hover:bg-green-200"
+          >
+            Ask a Question
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[525px]">
+          <DialogHeader>
+            <DialogTitle>Ask Question</DialogTitle>
+            <DialogDescription>
+              Provide type in your question here.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid items-center grid-cols-4 gap-4">
+              <Textarea
+                id="content"
+                value={content}
+                className="col-span-4"
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+              />
+            </div>
           </div>
-        </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant={"secondary"} type="reset" onClick={handleCancel}>
-              Cancel
-            </Button>
-          </DialogClose>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant={"secondary"} type="reset" onClick={handleCancel}>
+                Cancel
+              </Button>
+            </DialogClose>
 
-          <DialogClose asChild>
-            <Button type="submit" onClick={handleSave}>
-              Save
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+            <DialogClose asChild>
+              <Button type="submit" onClick={handleSave}>
+                Save
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 };

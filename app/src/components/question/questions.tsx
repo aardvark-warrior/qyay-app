@@ -9,13 +9,10 @@ const Questions = () => {
 
   return (
     <div>
-      {!user && (
-        <div className="flex items-center justify-center border-b border-slate-200">
-          <AddQuestionDialog />
-        </div>
-      )}
+      {!user && <AddQuestionDialog /> }
       <div className="border-b-2 border-slate-400">
-        {questions.length === 0 ? (
+        {questions.length === 0 
+        ? (
           <div className="p-4 text-center border-b border-slate-200 font-serif text-sm text-slate-400">
             No questions yet...
           </div>
