@@ -82,6 +82,36 @@ export const createEvent = async (
   };
 };
 
+// Update event by id
+export const updateEvent = async (
+  id: string, 
+  name?: string, 
+  description?: string, 
+  startTime?: string
+): Promise<Event> => {
+  const user = getAuthenticatedUser();
+  const token = getAuthenticatedUserToken();
+
+  const response = await fetch(`${API_URL}/events/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, description, startTime }),
+  });
+
+  const responseJson = await response.json();
+
+  if (!response.ok) {
+    handleError(response, responseJson.message);
+  }
+  
+  return {
+    ...responseJson.data,
+    user: user,
+  };
+};
+
 // Delete event by id
 export const deleteEvent = async (id: string): Promise<void> => {
   const token = getAuthenticatedUserToken();

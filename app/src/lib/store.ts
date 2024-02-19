@@ -15,6 +15,7 @@ type Action = {
   // Event
   setEvents: (events: EventWithUserData[]) => void;
   removeEvent: (id: string) => void;
+  editEvent: (event: EventWithUserData) => void;
   addEvent: (event: EventWithUserData) => void;
   setSelectedEventId: (id: string) => void;
   clearSelectedEventId: () => void;
@@ -49,6 +50,15 @@ export const useStore = create<State & Action>()(
     removeEvent: (id) => {
       const newEvents = get().events.filter((event) => event.id !== id);
       set({ events: newEvents });
+    },
+
+    editEvent: (event) => {
+      const idx = get().events.findIndex(
+        (oldEvent) => oldEvent.id === event.id,
+      );
+      const eventsCpy = get().events;
+      eventsCpy[idx] = event;
+      set({ events: [...eventsCpy]});
     },
 
     addEvent: (event) => {
