@@ -16,8 +16,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { DeleteEventDialog } from "./delete-event-dialog";
+import { EditEventDialog } from "./edit-event-dialog";
 
-const HostActions = ({ eventId }: { eventId: string }) => {
+const ChangeEventActions = ({ eventId }: { eventId: string }) => {
   const { deleteEventById } = useMutationsEvents();
 
   return (
@@ -55,17 +57,12 @@ const HostActions = ({ eventId }: { eventId: string }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem
-            className="text-red-500"
-            onClick={() => deleteEventById(eventId)}
-          >
-            Delete
-          </DropdownMenuItem>
+          <EditEventDialog eventId={eventId}/>
+          <DeleteEventDialog eventId={eventId}/>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
   );
 };
 
-export default HostActions;
+export default ChangeEventActions;
