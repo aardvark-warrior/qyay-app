@@ -5,7 +5,7 @@ import { AuthService } from "src/auth/auth.service";
 import { UserResponseDTO } from "./user-reponse.dto";
 import { UserLoginDTO } from "./user-login.dto";
 
-@Controller("users") 
+@Controller("users")
 export class UserController {
   constructor(
     private readonly userService: UserService,

@@ -14,7 +14,7 @@ export function cn(...inputs: ClassValue[]) {
 // For example "in 2 hours" or "Mon, Jul 26, 2021 9:46 PM"
 export function formatTimestamp(timestamp: string) {
   const formattedTimestamp =
-    dayjs().diff(dayjs(timestamp), "hour") > -24  
+    dayjs().diff(dayjs(timestamp), "hour") > -24
       ? dayjs(timestamp).fromNow()
       : dayjs(timestamp).format("ddd, MMM D, YYYY h:mm A");
   return formattedTimestamp;

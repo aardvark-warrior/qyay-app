@@ -21,7 +21,7 @@ function useMutationsEvents() {
           "There was an error deleting the event. Please try again later.",
       });
     }
-  }
+  };
 
   const deleteEventById = async (eventId: string) => {
     try {

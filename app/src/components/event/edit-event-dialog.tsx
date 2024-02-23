@@ -1,4 +1,12 @@
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";;
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "../ui/button";
 import useMutationsEvents from "@/hooks/use-mutations-events";
 import { useState } from "react";
@@ -9,22 +17,20 @@ export const EditEventDialog = ({ eventId }: { eventId: string }) => {
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const handleDialogClose = () => {
     setEditDialogOpen(false);
-  }
-  const handleCancel = () => {
+  };
+  const handleCancel = () => {};
 
-  }
-
-  const handleSave = () => {
-
-  }
+  const handleSave = () => {};
 
   return (
     <Dialog open={isEditDialogOpen} onOpenChange={handleDialogClose}>
-      <DropdownMenuItem onClick={(e) => {
-        e.preventDefault(); 
-        setEditDialogOpen(true);
-      }}>
-        <div aria-label={"Edit Event"} className="flex w-full" >
+      <DropdownMenuItem
+        onClick={(e) => {
+          e.preventDefault();
+          setEditDialogOpen(true);
+        }}
+      >
+        <div aria-label={"Edit Event"} className="flex w-full">
           Edit
         </div>
       </DropdownMenuItem>
@@ -37,12 +43,15 @@ export const EditEventDialog = ({ eventId }: { eventId: string }) => {
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
-            <Button size="sm" variant="secondary" type="reset">Cancel</Button>
+            <Button size="sm" variant="secondary" type="reset">
+              Cancel
+            </Button>
           </DialogClose>
-          <Button size="sm" onClick={() => (eventId)}>Save</Button>
+          <Button size="sm" onClick={() => eventId}>
+            Save
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
-}
-
+};

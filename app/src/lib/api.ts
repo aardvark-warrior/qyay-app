@@ -26,9 +26,11 @@ const handleError = (response: Response, message?: string) => {
 };
 
 // Fetch all events with user data
-export const fetchEvents = async (username?: string): Promise<EventWithUserData[]> => {
-  const response = (username) 
-    ? await fetch(`${API_URL}/events?withUserData=true&username=${username}`) 
+export const fetchEvents = async (
+  username?: string,
+): Promise<EventWithUserData[]> => {
+  const response = username
+    ? await fetch(`${API_URL}/events?withUserData=true&username=${username}`)
     : await fetch(`${API_URL}/events?withUserData=true`);
   const responseJson = await response.json();
 
@@ -84,10 +86,10 @@ export const createEvent = async (
 
 // Update event by id
 export const updateEvent = async (
-  id: string, 
-  name?: string, 
-  description?: string, 
-  startTime?: string
+  id: string,
+  name?: string,
+  description?: string,
+  startTime?: string,
 ): Promise<Event> => {
   const user = getAuthenticatedUser();
   const token = getAuthenticatedUserToken();
@@ -105,7 +107,7 @@ export const updateEvent = async (
   if (!response.ok) {
     handleError(response, responseJson.message);
   }
-  
+
   return {
     ...responseJson.data,
     user: user,

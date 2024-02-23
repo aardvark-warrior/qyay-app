@@ -16,11 +16,7 @@ const Sidebar = ({ isEventView = false }: { isEventView?: boolean }) => {
       <Button aria-label={"Home"} variant="outline" onClick={handleClickHome}>
         Home
       </Button>
-      {!isEventView && 
-        <>
-          {user ? <AddEventDialog /> : <JoinEventDialog />}
-        </>
-      }
+      {!isEventView && <>{user ? <AddEventDialog /> : <JoinEventDialog />}</>}
     </div>
   );
 };

@@ -58,7 +58,7 @@ export const useStore = create<State & Action>()(
       );
       const eventsCpy = get().events;
       eventsCpy[idx] = event;
-      set({ events: [...eventsCpy]});
+      set({ events: [...eventsCpy] });
     },
 
     addEvent: (event) => {

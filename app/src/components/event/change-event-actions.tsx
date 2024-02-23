@@ -57,8 +57,8 @@ const ChangeEventActions = ({ eventId }: { eventId: string }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <EditEventDialog eventId={eventId}/>
-          <DeleteEventDialog eventId={eventId}/>
+          <EditEventDialog eventId={eventId} />
+          <DeleteEventDialog eventId={eventId} />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

@@ -30,11 +30,11 @@ function useQueryEvents() {
   };
 
   const loadEvent = async (id: string) => {
-    let event = null;
+    let fetchedEvent = null;
     try {
-      event = await fetchEventById(id);
-      setEvent(event);
-      setSelectedEventId(event.id);
+      fetchedEvent = await fetchEventById(id);
+      setEvent(fetchedEvent);
+      setSelectedEventId(fetchedEvent.id);
     } catch (error) {
       setEvent(null);
       clearSelectedEventId();

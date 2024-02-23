@@ -78,11 +78,13 @@ export class EventController {
     @Query("withUserData") withUserData?: boolean,
   ): Promise<EventResponseDTO> {
     const event = await this.eventService.findOne(id, withUserData);
+    // Check if event with given Id exists in database
     if (!event) {
       throw new NotFoundException(`Event with ID ${id} not found`);
     }
-
+    // Client does not need to know userId of the event
     delete event.userId;
+    // If queried with user data, delete hashed user password
     if (withUserData) {
       delete event.user.password;
     }
